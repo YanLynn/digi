@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DigitalImageModelStoreContainer" CdmEntityContainer="DigitalImageEntities">
+    <EntitySetMapping Name="doc_type">
+      <EntityTypeMapping TypeName="DigitalImageModel.doc_type">
+        <MappingFragment StoreEntitySet="doc_type">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="doc_type1" ColumnName="doc_type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="file_info">
+      <EntityTypeMapping TypeName="DigitalImageModel.file_info">
+        <MappingFragment StoreEntitySet="file_info">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="pro_date" ColumnName="pro_date" />
+          <ScalarProperty Name="run_num" ColumnName="run_num" />
+          <ScalarProperty Name="file_type_id" ColumnName="file_type_id" />
+          <ScalarProperty Name="uen_type_id" ColumnName="uen_type_id" />
+          <ScalarProperty Name="uen" ColumnName="uen" />
+          <ScalarProperty Name="doc_type_id" ColumnName="doc_type_id" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="maker" ColumnName="maker" />
+          <ScalarProperty Name="chacker" ColumnName="chacker" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="file_type">
+      <EntityTypeMapping TypeName="DigitalImageModel.file_type">
+        <MappingFragment StoreEntitySet="file_type">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="file_type1" ColumnName="file_type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="DigitalImageModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="uen_type">
+      <EntityTypeMapping TypeName="DigitalImageModel.uen_type">
+        <MappingFragment StoreEntitySet="uen_type">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="uen_type1" ColumnName="uen_type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="users">
+      <EntityTypeMapping TypeName="DigitalImageModel.user">
+        <MappingFragment StoreEntitySet="users">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="machine_name" ColumnName="machine_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_auditTrail">
+      <EntityTypeMapping TypeName="DigitalImageModel.user_auditTrail">
+        <MappingFragment StoreEntitySet="user_auditTrail">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="machine_name" ColumnName="machine_name" />
+          <ScalarProperty Name="message" ColumnName="message" />
+          <ScalarProperty Name="date" ColumnName="date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="view_fileInfo">
+      <EntityTypeMapping TypeName="DigitalImageModel.view_fileInfo">
+        <MappingFragment StoreEntitySet="view_fileInfo">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="uen_type" ColumnName="uen_type" />
+          <ScalarProperty Name="file_type" ColumnName="file_type" />
+          <ScalarProperty Name="doc_type" ColumnName="doc_type" />
+          <ScalarProperty Name="chacker" ColumnName="chacker" />
+          <ScalarProperty Name="maker" ColumnName="maker" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="uen" ColumnName="uen" />
+          <ScalarProperty Name="run_num" ColumnName="run_num" />
+          <ScalarProperty Name="pro_date" ColumnName="pro_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

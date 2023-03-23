@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DigitalImageModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="doc_type">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="doc_type" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="file_info">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="pro_date" Type="date" />
+    <Property Name="run_num" Type="nvarchar" MaxLength="50" />
+    <Property Name="file_type_id" Type="int" />
+    <Property Name="uen_type_id" Type="int" />
+    <Property Name="uen" Type="nvarchar" MaxLength="50" />
+    <Property Name="doc_type_id" Type="int" />
+    <Property Name="created_at" Type="datetime" />
+    <Property Name="status" Type="int" />
+    <Property Name="maker" Type="nvarchar" MaxLength="50" />
+    <Property Name="chacker" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="file_type">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="file_type" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="uen_type">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="uen_type" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DigitalImage.dbo.user_auditTrail' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="user_auditTrail">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="username" Type="nvarchar" MaxLength="50" />
+    <Property Name="machine_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="message" Type="nvarchar" MaxLength="50" />
+    <Property Name="date" Type="date" />
+  </EntityType>
+  <EntityType Name="users">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="username" Type="nvarchar" MaxLength="50" />
+    <Property Name="machine_name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DigitalImage.dbo.view_fileInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="view_fileInfo">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="pro_date" Type="date" />
+    <Property Name="run_num" Type="nvarchar" MaxLength="50" />
+    <Property Name="uen" Type="nvarchar" MaxLength="50" />
+    <Property Name="created_at" Type="datetime" />
+    <Property Name="status" Type="int" />
+    <Property Name="maker" Type="nvarchar" MaxLength="50" />
+    <Property Name="chacker" Type="nvarchar" MaxLength="50" />
+    <Property Name="doc_type" Type="nvarchar" MaxLength="50" />
+    <Property Name="file_type" Type="nvarchar" MaxLength="50" />
+    <Property Name="uen_type" Type="nvarchar" MaxLength="50" />
+    <Property Name="id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_file_info_doc_info">
+    <End Role="doc_type" Type="Self.doc_type" Multiplicity="0..1" />
+    <End Role="file_info" Type="Self.file_info" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="doc_type">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="file_info">
+        <PropertyRef Name="doc_type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_file_info_file_type">
+    <End Role="file_type" Type="Self.file_type" Multiplicity="0..1" />
+    <End Role="file_info" Type="Self.file_info" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="file_type">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="file_info">
+        <PropertyRef Name="file_type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_file_info_uen_type">
+    <End Role="uen_type" Type="Self.uen_type" Multiplicity="0..1" />
+    <End Role="file_info" Type="Self.file_info" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="uen_type">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="file_info">
+        <PropertyRef Name="uen_type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DigitalImageModelStoreContainer">
+    <EntitySet Name="doc_type" EntityType="Self.doc_type" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="file_info" EntityType="Self.file_info" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="file_type" EntityType="Self.file_type" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="uen_type" EntityType="Self.uen_type" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user_auditTrail" EntityType="Self.user_auditTrail" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [user_auditTrail].[id] AS [id], 
+    [user_auditTrail].[username] AS [username], 
+    [user_auditTrail].[machine_name] AS [machine_name], 
+    [user_auditTrail].[message] AS [message], 
+    [user_auditTrail].[date] AS [date]
+    FROM [dbo].[user_auditTrail] AS [user_auditTrail]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="view_fileInfo" EntityType="Self.view_fileInfo" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [view_fileInfo].[pro_date] AS [pro_date], 
+    [view_fileInfo].[run_num] AS [run_num], 
+    [view_fileInfo].[uen] AS [uen], 
+    [view_fileInfo].[created_at] AS [created_at], 
+    [view_fileInfo].[status] AS [status], 
+    [view_fileInfo].[maker] AS [maker], 
+    [view_fileInfo].[chacker] AS [chacker], 
+    [view_fileInfo].[doc_type] AS [doc_type], 
+    [view_fileInfo].[file_type] AS [file_type], 
+    [view_fileInfo].[uen_type] AS [uen_type], 
+    [view_fileInfo].[id] AS [id]
+    FROM [dbo].[view_fileInfo] AS [view_fileInfo]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_file_info_doc_info" Association="Self.FK_file_info_doc_info">
+      <End Role="doc_type" EntitySet="doc_type" />
+      <End Role="file_info" EntitySet="file_info" />
+    </AssociationSet>
+    <AssociationSet Name="FK_file_info_file_type" Association="Self.FK_file_info_file_type">
+      <End Role="file_type" EntitySet="file_type" />
+      <End Role="file_info" EntitySet="file_info" />
+    </AssociationSet>
+    <AssociationSet Name="FK_file_info_uen_type" Association="Self.FK_file_info_uen_type">
+      <End Role="uen_type" EntitySet="uen_type" />
+      <End Role="file_info" EntitySet="file_info" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

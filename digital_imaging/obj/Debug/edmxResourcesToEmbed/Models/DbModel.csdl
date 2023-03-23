@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DigitalImageModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="doc_type">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="doc_type1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="file_info" Relationship="Self.FK_file_info_doc_info" FromRole="doc_type" ToRole="file_info" />
+  </EntityType>
+  <EntityType Name="file_info">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="pro_date" Type="DateTime" Precision="0" />
+    <Property Name="run_num" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="file_type_id" Type="Int32" />
+    <Property Name="uen_type_id" Type="Int32" />
+    <Property Name="uen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="doc_type_id" Type="Int32" />
+    <Property Name="created_at" Type="DateTime" Precision="3" />
+    <Property Name="status" Type="Int32" />
+    <Property Name="maker" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="chacker" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="doc_type" Relationship="Self.FK_file_info_doc_info" FromRole="file_info" ToRole="doc_type" />
+    <NavigationProperty Name="file_type" Relationship="Self.FK_file_info_file_type" FromRole="file_info" ToRole="file_type" />
+    <NavigationProperty Name="uen_type" Relationship="Self.FK_file_info_uen_type" FromRole="file_info" ToRole="uen_type" />
+  </EntityType>
+  <EntityType Name="file_type">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="file_type1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="file_info" Relationship="Self.FK_file_info_file_type" FromRole="file_type" ToRole="file_info" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="uen_type">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="uen_type1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="file_info" Relationship="Self.FK_file_info_uen_type" FromRole="uen_type" ToRole="file_info" />
+  </EntityType>
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="machine_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="user_auditTrail">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="machine_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="message" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="date" Type="DateTime" Precision="0" />
+  </EntityType>
+  <Association Name="FK_file_info_doc_info">
+    <End Role="doc_type" Type="Self.doc_type" Multiplicity="0..1" />
+    <End Role="file_info" Type="Self.file_info" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="doc_type">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="file_info">
+        <PropertyRef Name="doc_type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_file_info_file_type">
+    <End Role="file_type" Type="Self.file_type" Multiplicity="0..1" />
+    <End Role="file_info" Type="Self.file_info" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="file_type">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="file_info">
+        <PropertyRef Name="file_type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_file_info_uen_type">
+    <End Role="uen_type" Type="Self.uen_type" Multiplicity="0..1" />
+    <End Role="file_info" Type="Self.file_info" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="uen_type">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="file_info">
+        <PropertyRef Name="uen_type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DigitalImageEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="doc_type" EntityType="Self.doc_type" />
+    <EntitySet Name="file_info" EntityType="Self.file_info" />
+    <EntitySet Name="file_type" EntityType="Self.file_type" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="uen_type" EntityType="Self.uen_type" />
+    <EntitySet Name="users" EntityType="Self.user" />
+    <EntitySet Name="user_auditTrail" EntityType="Self.user_auditTrail" />
+    <AssociationSet Name="FK_file_info_doc_info" Association="Self.FK_file_info_doc_info">
+      <End Role="doc_type" EntitySet="doc_type" />
+      <End Role="file_info" EntitySet="file_info" />
+    </AssociationSet>
+    <AssociationSet Name="FK_file_info_file_type" Association="Self.FK_file_info_file_type">
+      <End Role="file_type" EntitySet="file_type" />
+      <End Role="file_info" EntitySet="file_info" />
+    </AssociationSet>
+    <AssociationSet Name="FK_file_info_uen_type" Association="Self.FK_file_info_uen_type">
+      <End Role="uen_type" EntitySet="uen_type" />
+      <End Role="file_info" EntitySet="file_info" />
+    </AssociationSet>
+    <EntitySet Name="view_fileInfo" EntityType="DigitalImageModel.view_fileInfo" />
+  </EntityContainer>
+  <EntityType Name="view_fileInfo">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="pro_date" Type="DateTime" Precision="0" />
+    <Property Name="run_num" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="uen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="created_at" Type="DateTime" Precision="3" />
+    <Property Name="status" Type="Int32" />
+    <Property Name="maker" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="chacker" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="doc_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="file_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="uen_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="id" Type="Int32" Nullable="false" />
+  </EntityType>
+</Schema>

@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DigitalImageModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="docType">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="docName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="fileInfo">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fileUniqueID" Type="nvarchar" MaxLength="50" />
+    <Property Name="imageList" Type="nvarchar" MaxLength="255" />
+    <Property Name="pro_date" Type="date" />
+    <Property Name="rumNum" Type="nvarchar" MaxLength="50" />
+    <Property Name="fileType_id" Type="int" />
+    <Property Name="uenType_id" Type="int" />
+    <Property Name="uenValue" Type="nvarchar" MaxLength="50" />
+    <Property Name="docType_id" Type="int" />
+    <Property Name="status" Type="int" />
+    <Property Name="maker" Type="nvarchar" MaxLength="50" />
+    <Property Name="chacker" Type="nvarchar" MaxLength="50" />
+    <Property Name="genPDF" Type="nvarchar" MaxLength="50" />
+    <Property Name="created_at" Type="datetime" />
+  </EntityType>
+  <EntityType Name="fileType">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fileName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="uenType">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="uenName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="user_auditTrail">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fileInfoID" Type="int" />
+    <Property Name="username" Type="nvarchar" MaxLength="50" />
+    <Property Name="machine_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="message" Type="nvarchar" MaxLength="50" />
+    <Property Name="date" Type="date" />
+  </EntityType>
+  <EntityType Name="users">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="username" Type="nvarchar" MaxLength="50" />
+    <Property Name="machine_name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DigitalImage.dbo.view_fileInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="view_fileInfo">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="fileUniqueID" Type="nvarchar" MaxLength="50" />
+    <Property Name="imageList" Type="nvarchar" MaxLength="255" />
+    <Property Name="pro_date" Type="date" />
+    <Property Name="rumNum" Type="nvarchar" MaxLength="50" />
+    <Property Name="uenValue" Type="nvarchar" MaxLength="50" />
+    <Property Name="status" Type="int" />
+    <Property Name="maker" Type="nvarchar" MaxLength="50" />
+    <Property Name="chacker" Type="nvarchar" MaxLength="50" />
+    <Property Name="genPDF" Type="nvarchar" MaxLength="50" />
+    <Property Name="created_at" Type="datetime" />
+    <Property Name="fileName" Type="nvarchar" MaxLength="50" />
+    <Property Name="uenName" Type="nvarchar" MaxLength="50" />
+    <Property Name="docName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_file_info_doc_info">
+    <End Role="docType" Type="Self.docType" Multiplicity="0..1" />
+    <End Role="fileInfo" Type="Self.fileInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="docType">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="fileInfo">
+        <PropertyRef Name="docType_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_file_info_file_type">
+    <End Role="fileType" Type="Self.fileType" Multiplicity="0..1" />
+    <End Role="fileInfo" Type="Self.fileInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="fileType">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="fileInfo">
+        <PropertyRef Name="fileType_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_file_info_uen_type">
+    <End Role="uenType" Type="Self.uenType" Multiplicity="0..1" />
+    <End Role="fileInfo" Type="Self.fileInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="uenType">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="fileInfo">
+        <PropertyRef Name="uenType_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_auditTrail_fileInfo">
+    <End Role="fileInfo" Type="Self.fileInfo" Multiplicity="0..1" />
+    <End Role="user_auditTrail" Type="Self.user_auditTrail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="fileInfo">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="user_auditTrail">
+        <PropertyRef Name="fileInfoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DigitalImageModelStoreContainer">
+    <EntitySet Name="docType" EntityType="Self.docType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="fileInfo" EntityType="Self.fileInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="fileType" EntityType="Self.fileType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="uenType" EntityType="Self.uenType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user_auditTrail" EntityType="Self.user_auditTrail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="view_fileInfo" EntityType="Self.view_fileInfo" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [view_fileInfo].[id] AS [id], 
+    [view_fileInfo].[fileUniqueID] AS [fileUniqueID], 
+    [view_fileInfo].[imageList] AS [imageList], 
+    [view_fileInfo].[pro_date] AS [pro_date], 
+    [view_fileInfo].[rumNum] AS [rumNum], 
+    [view_fileInfo].[uenValue] AS [uenValue], 
+    [view_fileInfo].[status] AS [status], 
+    [view_fileInfo].[maker] AS [maker], 
+    [view_fileInfo].[chacker] AS [chacker], 
+    [view_fileInfo].[genPDF] AS [genPDF], 
+    [view_fileInfo].[created_at] AS [created_at], 
+    [view_fileInfo].[fileName] AS [fileName], 
+    [view_fileInfo].[uenName] AS [uenName], 
+    [view_fileInfo].[docName] AS [docName]
+    FROM [dbo].[view_fileInfo] AS [view_fileInfo]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_file_info_doc_info" Association="Self.FK_file_info_doc_info">
+      <End Role="docType" EntitySet="docType" />
+      <End Role="fileInfo" EntitySet="fileInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_file_info_file_type" Association="Self.FK_file_info_file_type">
+      <End Role="fileType" EntitySet="fileType" />
+      <End Role="fileInfo" EntitySet="fileInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_file_info_uen_type" Association="Self.FK_file_info_uen_type">
+      <End Role="uenType" EntitySet="uenType" />
+      <End Role="fileInfo" EntitySet="fileInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_auditTrail_fileInfo" Association="Self.FK_user_auditTrail_fileInfo">
+      <End Role="fileInfo" EntitySet="fileInfo" />
+      <End Role="user_auditTrail" EntitySet="user_auditTrail" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

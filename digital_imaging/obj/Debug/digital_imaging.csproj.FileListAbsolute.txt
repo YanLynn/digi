@@ -1,0 +1,184 @@
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\bin\Debug\digital_imaging.exe.config
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\bin\Debug\digital_imaging.exe
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\bin\Debug\digital_imaging.pdb
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\obj\Debug\digital_imaging.csproj.AssemblyReference.cache
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\obj\Debug\digital_imaging.csproj.SuggestedBindingRedirects.cache
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\obj\Debug\digital_imaging.Form1.resources
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\obj\Debug\digital_imaging.Properties.Resources.resources
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\obj\Debug\digital_imaging.csproj.GenerateResource.cache
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\obj\Debug\digital_imaging.csproj.CoreCompileInputs.cache
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\obj\Debug\digital_imaging.exe
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\obj\Debug\digital_imaging.pdb
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\obj\Debug\digital_imaging.FormSelect.resources
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\obj\Debug\digital_imaging.FormSetup.resources
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\bin\Debug\TWAIN.dll
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\obj\Debug\digital_imaging.csproj.CopyComplete
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\bin\Debug\PdfSharp.dll
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\bin\Debug\zxing.dll
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\bin\Debug\bg\digital_imaging.resources.dll
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\bin\Debug\ca\digital_imaging.resources.dll
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\bin\Debug\cs\digital_imaging.resources.dll
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\bin\Debug\da\digital_imaging.resources.dll
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\bin\Debug\de\digital_imaging.resources.dll
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\bin\Debug\es\digital_imaging.resources.dll
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\bin\Debug\fr\digital_imaging.resources.dll
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\bin\Debug\he\digital_imaging.resources.dll
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\bin\Debug\it\digital_imaging.resources.dll
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\bin\Debug\pl\digital_imaging.resources.dll
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\bin\Debug\pt-BR\digital_imaging.resources.dll
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\bin\Debug\pt-PT\digital_imaging.resources.dll
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\bin\Debug\ru\digital_imaging.resources.dll
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\bin\Debug\uk\digital_imaging.resources.dll
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\obj\Debug\digital_imaging.ThumbnailList.resources
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\obj\Debug\digital_imaging.ThumbnailList.bg.resources
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\obj\Debug\digital_imaging.ThumbnailList.ca.resources
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\obj\Debug\digital_imaging.ThumbnailList.cs.resources
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\obj\Debug\digital_imaging.ThumbnailList.da.resources
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\obj\Debug\digital_imaging.ThumbnailList.de.resources
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\obj\Debug\digital_imaging.ThumbnailList.es.resources
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\obj\Debug\digital_imaging.ThumbnailList.fr.resources
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\obj\Debug\digital_imaging.ThumbnailList.he.resources
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\obj\Debug\digital_imaging.ThumbnailList.it.resources
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\obj\Debug\digital_imaging.ThumbnailList.pl.resources
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\obj\Debug\digital_imaging.ThumbnailList.pt-BR.resources
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\obj\Debug\digital_imaging.ThumbnailList.pt-PT.resources
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\obj\Debug\digital_imaging.ThumbnailList.ru.resources
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\obj\Debug\digital_imaging.ThumbnailList.uk.resources
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\obj\Debug\bg\digital_imaging.resources.dll
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\obj\Debug\ca\digital_imaging.resources.dll
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\obj\Debug\cs\digital_imaging.resources.dll
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\obj\Debug\da\digital_imaging.resources.dll
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\obj\Debug\de\digital_imaging.resources.dll
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\obj\Debug\es\digital_imaging.resources.dll
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\obj\Debug\fr\digital_imaging.resources.dll
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\obj\Debug\he\digital_imaging.resources.dll
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\obj\Debug\it\digital_imaging.resources.dll
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\obj\Debug\pl\digital_imaging.resources.dll
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\obj\Debug\pt-BR\digital_imaging.resources.dll
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\obj\Debug\pt-PT\digital_imaging.resources.dll
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\obj\Debug\ru\digital_imaging.resources.dll
+C:\Users\admin\Desktop\DIDI\digital_imaging\digital_imaging\obj\Debug\uk\digital_imaging.resources.dll
+D:\digital_imaging\digital_imaging\bin\Debug\digital_imaging.exe.config
+D:\digital_imaging\digital_imaging\bin\Debug\digital_imaging.exe
+D:\digital_imaging\digital_imaging\bin\Debug\digital_imaging.pdb
+D:\digital_imaging\digital_imaging\bin\Debug\bg\digital_imaging.resources.dll
+D:\digital_imaging\digital_imaging\bin\Debug\ca\digital_imaging.resources.dll
+D:\digital_imaging\digital_imaging\bin\Debug\cs\digital_imaging.resources.dll
+D:\digital_imaging\digital_imaging\bin\Debug\da\digital_imaging.resources.dll
+D:\digital_imaging\digital_imaging\bin\Debug\de\digital_imaging.resources.dll
+D:\digital_imaging\digital_imaging\bin\Debug\es\digital_imaging.resources.dll
+D:\digital_imaging\digital_imaging\bin\Debug\fr\digital_imaging.resources.dll
+D:\digital_imaging\digital_imaging\bin\Debug\he\digital_imaging.resources.dll
+D:\digital_imaging\digital_imaging\bin\Debug\it\digital_imaging.resources.dll
+D:\digital_imaging\digital_imaging\bin\Debug\pl\digital_imaging.resources.dll
+D:\digital_imaging\digital_imaging\bin\Debug\pt-BR\digital_imaging.resources.dll
+D:\digital_imaging\digital_imaging\bin\Debug\pt-PT\digital_imaging.resources.dll
+D:\digital_imaging\digital_imaging\bin\Debug\ru\digital_imaging.resources.dll
+D:\digital_imaging\digital_imaging\bin\Debug\uk\digital_imaging.resources.dll
+D:\digital_imaging\digital_imaging\bin\Debug\EntityFramework.dll
+D:\digital_imaging\digital_imaging\bin\Debug\EntityFramework.SqlServer.dll
+D:\digital_imaging\digital_imaging\bin\Debug\EntityFramework.xml
+D:\digital_imaging\digital_imaging\bin\Debug\EntityFramework.SqlServer.xml
+D:\digital_imaging\digital_imaging\obj\Debug\digital_imaging.csproj.AssemblyReference.cache
+D:\digital_imaging\digital_imaging\obj\Debug\digital_imaging.csproj.SuggestedBindingRedirects.cache
+D:\digital_imaging\digital_imaging\obj\Debug\digital_imaging.DataEntry.resources
+D:\digital_imaging\digital_imaging\obj\Debug\digital_imaging.MainForm.resources
+D:\digital_imaging\digital_imaging\obj\Debug\digital_imaging.FormSelect.resources
+D:\digital_imaging\digital_imaging\obj\Debug\digital_imaging.FormSetup.resources
+D:\digital_imaging\digital_imaging\obj\Debug\digital_imaging.Properties.Resources.resources
+D:\digital_imaging\digital_imaging\obj\Debug\digital_imaging.ThumbnailList.resources
+D:\digital_imaging\digital_imaging\obj\Debug\digital_imaging.ThumbnailList.bg.resources
+D:\digital_imaging\digital_imaging\obj\Debug\digital_imaging.ThumbnailList.ca.resources
+D:\digital_imaging\digital_imaging\obj\Debug\digital_imaging.ThumbnailList.cs.resources
+D:\digital_imaging\digital_imaging\obj\Debug\digital_imaging.ThumbnailList.da.resources
+D:\digital_imaging\digital_imaging\obj\Debug\digital_imaging.ThumbnailList.de.resources
+D:\digital_imaging\digital_imaging\obj\Debug\digital_imaging.ThumbnailList.es.resources
+D:\digital_imaging\digital_imaging\obj\Debug\digital_imaging.ThumbnailList.fr.resources
+D:\digital_imaging\digital_imaging\obj\Debug\digital_imaging.ThumbnailList.he.resources
+D:\digital_imaging\digital_imaging\obj\Debug\digital_imaging.ThumbnailList.it.resources
+D:\digital_imaging\digital_imaging\obj\Debug\digital_imaging.ThumbnailList.pl.resources
+D:\digital_imaging\digital_imaging\obj\Debug\digital_imaging.ThumbnailList.pt-BR.resources
+D:\digital_imaging\digital_imaging\obj\Debug\digital_imaging.ThumbnailList.pt-PT.resources
+D:\digital_imaging\digital_imaging\obj\Debug\digital_imaging.ThumbnailList.ru.resources
+D:\digital_imaging\digital_imaging\obj\Debug\digital_imaging.ThumbnailList.uk.resources
+D:\digital_imaging\digital_imaging\obj\Debug\digital_imaging.csproj.GenerateResource.cache
+D:\digital_imaging\digital_imaging\obj\Debug\digital_imaging.csproj.CoreCompileInputs.cache
+D:\digital_imaging\digital_imaging\obj\Debug\bg\digital_imaging.resources.dll
+D:\digital_imaging\digital_imaging\obj\Debug\ca\digital_imaging.resources.dll
+D:\digital_imaging\digital_imaging\obj\Debug\cs\digital_imaging.resources.dll
+D:\digital_imaging\digital_imaging\obj\Debug\da\digital_imaging.resources.dll
+D:\digital_imaging\digital_imaging\obj\Debug\de\digital_imaging.resources.dll
+D:\digital_imaging\digital_imaging\obj\Debug\es\digital_imaging.resources.dll
+D:\digital_imaging\digital_imaging\obj\Debug\fr\digital_imaging.resources.dll
+D:\digital_imaging\digital_imaging\obj\Debug\he\digital_imaging.resources.dll
+D:\digital_imaging\digital_imaging\obj\Debug\it\digital_imaging.resources.dll
+D:\digital_imaging\digital_imaging\obj\Debug\pl\digital_imaging.resources.dll
+D:\digital_imaging\digital_imaging\obj\Debug\pt-BR\digital_imaging.resources.dll
+D:\digital_imaging\digital_imaging\obj\Debug\pt-PT\digital_imaging.resources.dll
+D:\digital_imaging\digital_imaging\obj\Debug\ru\digital_imaging.resources.dll
+D:\digital_imaging\digital_imaging\obj\Debug\uk\digital_imaging.resources.dll
+D:\digital_imaging\digital_imaging\obj\Debug\digital_imaging.csproj.CopyComplete
+D:\digital_imaging\digital_imaging\obj\Debug\digital_imaging.exe
+D:\digital_imaging\digital_imaging\obj\Debug\digital_imaging.pdb
+D:\c# winApp\digi\digital_imaging\bin\Debug\digital_imaging.exe.config
+D:\c# winApp\digi\digital_imaging\bin\Debug\digital_imaging.exe
+D:\c# winApp\digi\digital_imaging\bin\Debug\digital_imaging.pdb
+D:\c# winApp\digi\digital_imaging\bin\Debug\bg\digital_imaging.resources.dll
+D:\c# winApp\digi\digital_imaging\bin\Debug\ca\digital_imaging.resources.dll
+D:\c# winApp\digi\digital_imaging\bin\Debug\cs\digital_imaging.resources.dll
+D:\c# winApp\digi\digital_imaging\bin\Debug\da\digital_imaging.resources.dll
+D:\c# winApp\digi\digital_imaging\bin\Debug\de\digital_imaging.resources.dll
+D:\c# winApp\digi\digital_imaging\bin\Debug\es\digital_imaging.resources.dll
+D:\c# winApp\digi\digital_imaging\bin\Debug\fr\digital_imaging.resources.dll
+D:\c# winApp\digi\digital_imaging\bin\Debug\he\digital_imaging.resources.dll
+D:\c# winApp\digi\digital_imaging\bin\Debug\it\digital_imaging.resources.dll
+D:\c# winApp\digi\digital_imaging\bin\Debug\pl\digital_imaging.resources.dll
+D:\c# winApp\digi\digital_imaging\bin\Debug\pt-BR\digital_imaging.resources.dll
+D:\c# winApp\digi\digital_imaging\bin\Debug\pt-PT\digital_imaging.resources.dll
+D:\c# winApp\digi\digital_imaging\bin\Debug\ru\digital_imaging.resources.dll
+D:\c# winApp\digi\digital_imaging\bin\Debug\uk\digital_imaging.resources.dll
+D:\c# winApp\digi\digital_imaging\bin\Debug\EntityFramework.dll
+D:\c# winApp\digi\digital_imaging\bin\Debug\EntityFramework.SqlServer.dll
+D:\c# winApp\digi\digital_imaging\bin\Debug\EntityFramework.xml
+D:\c# winApp\digi\digital_imaging\bin\Debug\EntityFramework.SqlServer.xml
+D:\c# winApp\digi\digital_imaging\obj\Debug\digital_imaging.csproj.AssemblyReference.cache
+D:\c# winApp\digi\digital_imaging\obj\Debug\digital_imaging.csproj.SuggestedBindingRedirects.cache
+D:\c# winApp\digi\digital_imaging\obj\Debug\digital_imaging.DataEntry.resources
+D:\c# winApp\digi\digital_imaging\obj\Debug\digital_imaging.MainForm.resources
+D:\c# winApp\digi\digital_imaging\obj\Debug\digital_imaging.FormSelect.resources
+D:\c# winApp\digi\digital_imaging\obj\Debug\digital_imaging.FormSetup.resources
+D:\c# winApp\digi\digital_imaging\obj\Debug\digital_imaging.Properties.Resources.resources
+D:\c# winApp\digi\digital_imaging\obj\Debug\digital_imaging.ThumbnailList.resources
+D:\c# winApp\digi\digital_imaging\obj\Debug\digital_imaging.ThumbnailList.bg.resources
+D:\c# winApp\digi\digital_imaging\obj\Debug\digital_imaging.ThumbnailList.ca.resources
+D:\c# winApp\digi\digital_imaging\obj\Debug\digital_imaging.ThumbnailList.cs.resources
+D:\c# winApp\digi\digital_imaging\obj\Debug\digital_imaging.ThumbnailList.da.resources
+D:\c# winApp\digi\digital_imaging\obj\Debug\digital_imaging.ThumbnailList.de.resources
+D:\c# winApp\digi\digital_imaging\obj\Debug\digital_imaging.ThumbnailList.es.resources
+D:\c# winApp\digi\digital_imaging\obj\Debug\digital_imaging.ThumbnailList.fr.resources
+D:\c# winApp\digi\digital_imaging\obj\Debug\digital_imaging.ThumbnailList.he.resources
+D:\c# winApp\digi\digital_imaging\obj\Debug\digital_imaging.ThumbnailList.it.resources
+D:\c# winApp\digi\digital_imaging\obj\Debug\digital_imaging.ThumbnailList.pl.resources
+D:\c# winApp\digi\digital_imaging\obj\Debug\digital_imaging.ThumbnailList.pt-BR.resources
+D:\c# winApp\digi\digital_imaging\obj\Debug\digital_imaging.ThumbnailList.pt-PT.resources
+D:\c# winApp\digi\digital_imaging\obj\Debug\digital_imaging.ThumbnailList.ru.resources
+D:\c# winApp\digi\digital_imaging\obj\Debug\digital_imaging.ThumbnailList.uk.resources
+D:\c# winApp\digi\digital_imaging\obj\Debug\digital_imaging.csproj.GenerateResource.cache
+D:\c# winApp\digi\digital_imaging\obj\Debug\digital_imaging.csproj.CoreCompileInputs.cache
+D:\c# winApp\digi\digital_imaging\obj\Debug\bg\digital_imaging.resources.dll
+D:\c# winApp\digi\digital_imaging\obj\Debug\ca\digital_imaging.resources.dll
+D:\c# winApp\digi\digital_imaging\obj\Debug\cs\digital_imaging.resources.dll
+D:\c# winApp\digi\digital_imaging\obj\Debug\da\digital_imaging.resources.dll
+D:\c# winApp\digi\digital_imaging\obj\Debug\de\digital_imaging.resources.dll
+D:\c# winApp\digi\digital_imaging\obj\Debug\es\digital_imaging.resources.dll
+D:\c# winApp\digi\digital_imaging\obj\Debug\fr\digital_imaging.resources.dll
+D:\c# winApp\digi\digital_imaging\obj\Debug\he\digital_imaging.resources.dll
+D:\c# winApp\digi\digital_imaging\obj\Debug\it\digital_imaging.resources.dll
+D:\c# winApp\digi\digital_imaging\obj\Debug\pl\digital_imaging.resources.dll
+D:\c# winApp\digi\digital_imaging\obj\Debug\pt-BR\digital_imaging.resources.dll
+D:\c# winApp\digi\digital_imaging\obj\Debug\pt-PT\digital_imaging.resources.dll
+D:\c# winApp\digi\digital_imaging\obj\Debug\ru\digital_imaging.resources.dll
+D:\c# winApp\digi\digital_imaging\obj\Debug\uk\digital_imaging.resources.dll
+D:\c# winApp\digi\digital_imaging\obj\Debug\digital_imaging.csproj.CopyComplete
+D:\c# winApp\digi\digital_imaging\obj\Debug\digital_imaging.exe
+D:\c# winApp\digi\digital_imaging\obj\Debug\digital_imaging.pdb
