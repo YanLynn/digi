@@ -1,375 +1,208 @@
-USE [master]
-GO
-/****** Object:  Database [DigitalImage]    Script Date: 24/3/2023 10:44:41 am ******/
-CREATE DATABASE [DigitalImage]
- CONTAINMENT = NONE
- ON  PRIMARY 
-( NAME = N'digital_Imaging', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL16.SQLEXPRESS01\MSSQL\DATA\digital_Imaging.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
- LOG ON 
-( NAME = N'digital_Imaging_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL16.SQLEXPRESS01\MSSQL\DATA\digital_Imaging_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
- WITH CATALOG_COLLATION = DATABASE_DEFAULT, LEDGER = OFF
-GO
-ALTER DATABASE [DigitalImage] SET COMPATIBILITY_LEVEL = 150
-GO
-IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
-begin
-EXEC [DigitalImage].[dbo].[sp_fulltext_database] @action = 'enable'
-end
-GO
-ALTER DATABASE [DigitalImage] SET ANSI_NULL_DEFAULT OFF 
-GO
-ALTER DATABASE [DigitalImage] SET ANSI_NULLS OFF 
-GO
-ALTER DATABASE [DigitalImage] SET ANSI_PADDING OFF 
-GO
-ALTER DATABASE [DigitalImage] SET ANSI_WARNINGS OFF 
-GO
-ALTER DATABASE [DigitalImage] SET ARITHABORT OFF 
-GO
-ALTER DATABASE [DigitalImage] SET AUTO_CLOSE OFF 
-GO
-ALTER DATABASE [DigitalImage] SET AUTO_SHRINK OFF 
-GO
-ALTER DATABASE [DigitalImage] SET AUTO_UPDATE_STATISTICS ON 
-GO
-ALTER DATABASE [DigitalImage] SET CURSOR_CLOSE_ON_COMMIT OFF 
-GO
-ALTER DATABASE [DigitalImage] SET CURSOR_DEFAULT  GLOBAL 
-GO
-ALTER DATABASE [DigitalImage] SET CONCAT_NULL_YIELDS_NULL OFF 
-GO
-ALTER DATABASE [DigitalImage] SET NUMERIC_ROUNDABORT OFF 
-GO
-ALTER DATABASE [DigitalImage] SET QUOTED_IDENTIFIER OFF 
-GO
-ALTER DATABASE [DigitalImage] SET RECURSIVE_TRIGGERS OFF 
-GO
-ALTER DATABASE [DigitalImage] SET  DISABLE_BROKER 
-GO
-ALTER DATABASE [DigitalImage] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
-GO
-ALTER DATABASE [DigitalImage] SET DATE_CORRELATION_OPTIMIZATION OFF 
-GO
-ALTER DATABASE [DigitalImage] SET TRUSTWORTHY OFF 
-GO
-ALTER DATABASE [DigitalImage] SET ALLOW_SNAPSHOT_ISOLATION OFF 
-GO
-ALTER DATABASE [DigitalImage] SET PARAMETERIZATION SIMPLE 
-GO
-ALTER DATABASE [DigitalImage] SET READ_COMMITTED_SNAPSHOT OFF 
-GO
-ALTER DATABASE [DigitalImage] SET HONOR_BROKER_PRIORITY OFF 
-GO
-ALTER DATABASE [DigitalImage] SET RECOVERY FULL 
-GO
-ALTER DATABASE [DigitalImage] SET  MULTI_USER 
-GO
-ALTER DATABASE [DigitalImage] SET PAGE_VERIFY CHECKSUM  
-GO
-ALTER DATABASE [DigitalImage] SET DB_CHAINING OFF 
-GO
-ALTER DATABASE [DigitalImage] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
-GO
-ALTER DATABASE [DigitalImage] SET TARGET_RECOVERY_TIME = 60 SECONDS 
-GO
-ALTER DATABASE [DigitalImage] SET DELAYED_DURABILITY = DISABLED 
-GO
-ALTER DATABASE [DigitalImage] SET ACCELERATED_DATABASE_RECOVERY = OFF  
-GO
-ALTER DATABASE [DigitalImage] SET QUERY_STORE = OFF
-GO
-USE [DigitalImage]
-GO
-/****** Object:  Table [dbo].[fileType]    Script Date: 24/3/2023 10:44:41 am ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[fileType](
-	[id] [int] IDENTITY(1,1) NOT NULL,
-	[fileName] [nvarchar](50) NULL,
- CONSTRAINT [PK_file_type] PRIMARY KEY CLUSTERED 
-(
-	[id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[uenType]    Script Date: 24/3/2023 10:44:41 am ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[uenType](
-	[id] [int] IDENTITY(1,1) NOT NULL,
-	[uenName] [nvarchar](50) NULL,
- CONSTRAINT [PK_uen_type] PRIMARY KEY CLUSTERED 
-(
-	[id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[docType]    Script Date: 24/3/2023 10:44:41 am ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[docType](
-	[id] [int] IDENTITY(1,1) NOT NULL,
-	[docName] [nvarchar](50) NULL,
- CONSTRAINT [PK_doc_type] PRIMARY KEY CLUSTERED 
-(
-	[id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[fileInfo]    Script Date: 24/3/2023 10:44:41 am ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[fileInfo](
-	[id] [int] IDENTITY(1,1) NOT NULL,
-	[fileUniqueID] [nvarchar](50) NULL,
-	[imageList] [nvarchar](255) NULL,
-	[pro_date] [date] NULL,
-	[rumNum] [nvarchar](50) NULL,
-	[fileType_id] [int] NULL,
-	[uenType_id] [int] NULL,
-	[uenValue] [nvarchar](50) NULL,
-	[docType_id] [int] NULL,
-	[status] [int] NULL,
-	[maker] [nvarchar](50) NULL,
-	[chacker] [nvarchar](50) NULL,
-	[genPDF] [nvarchar](50) NULL,
-	[created_at] [datetime] NULL,
- CONSTRAINT [PK_file_info] PRIMARY KEY CLUSTERED 
-(
-	[id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-/****** Object:  View [dbo].[view_fileInfo]    Script Date: 24/3/2023 10:44:41 am ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE VIEW [dbo].[view_fileInfo]
-AS
-SELECT dbo.fileInfo.id, dbo.fileInfo.fileUniqueID, dbo.fileInfo.imageList, dbo.fileInfo.pro_date, dbo.fileInfo.rumNum, dbo.fileInfo.uenValue, dbo.fileInfo.status, dbo.fileInfo.maker, dbo.fileInfo.chacker, dbo.fileInfo.genPDF, dbo.fileInfo.created_at, dbo.fileType.fileName, dbo.uenType.uenName, dbo.docType.docName
-FROM   dbo.fileInfo INNER JOIN
-            dbo.fileType ON dbo.fileInfo.fileType_id = dbo.fileType.id INNER JOIN
-            dbo.uenType ON dbo.fileInfo.uenType_id = dbo.uenType.id INNER JOIN
-            dbo.docType ON dbo.fileInfo.docType_id = dbo.docType.id
-GO
-/****** Object:  Table [dbo].[user_auditTrail]    Script Date: 24/3/2023 10:44:41 am ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[user_auditTrail](
-	[id] [int] IDENTITY(1,1) NOT NULL,
-	[fileInfoID] [int] NULL,
-	[username] [nvarchar](50) NULL,
-	[machine_name] [nvarchar](50) NULL,
-	[message] [nvarchar](50) NULL,
-	[date] [date] NULL,
- CONSTRAINT [PK_user_auditTrail] PRIMARY KEY CLUSTERED 
-(
-	[id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[users]    Script Date: 24/3/2023 10:44:41 am ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[users](
-	[id] [int] IDENTITY(1,1) NOT NULL,
-	[username] [nvarchar](50) NULL,
-	[machine_name] [nvarchar](50) NULL,
- CONSTRAINT [PK_users] PRIMARY KEY CLUSTERED 
-(
-	[id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-ALTER TABLE [dbo].[fileInfo]  WITH CHECK ADD  CONSTRAINT [FK_file_info_doc_info] FOREIGN KEY([docType_id])
-REFERENCES [dbo].[docType] ([id])
-GO
-ALTER TABLE [dbo].[fileInfo] CHECK CONSTRAINT [FK_file_info_doc_info]
-GO
-ALTER TABLE [dbo].[fileInfo]  WITH CHECK ADD  CONSTRAINT [FK_file_info_file_type] FOREIGN KEY([fileType_id])
-REFERENCES [dbo].[fileType] ([id])
-GO
-ALTER TABLE [dbo].[fileInfo] CHECK CONSTRAINT [FK_file_info_file_type]
-GO
-ALTER TABLE [dbo].[fileInfo]  WITH CHECK ADD  CONSTRAINT [FK_file_info_uen_type] FOREIGN KEY([uenType_id])
-REFERENCES [dbo].[uenType] ([id])
-GO
-ALTER TABLE [dbo].[fileInfo] CHECK CONSTRAINT [FK_file_info_uen_type]
-GO
-ALTER TABLE [dbo].[user_auditTrail]  WITH CHECK ADD  CONSTRAINT [FK_user_auditTrail_fileInfo] FOREIGN KEY([fileInfoID])
-REFERENCES [dbo].[fileInfo] ([id])
-GO
-ALTER TABLE [dbo].[user_auditTrail] CHECK CONSTRAINT [FK_user_auditTrail_fileInfo]
-GO
-EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPane1', @value=N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
-Begin DesignProperties = 
-   Begin PaneConfigurations = 
-      Begin PaneConfiguration = 0
-         NumPanes = 4
-         Configuration = "(H (1[41] 4[27] 2[13] 3) )"
-      End
-      Begin PaneConfiguration = 1
-         NumPanes = 3
-         Configuration = "(H (1 [50] 4 [25] 3))"
-      End
-      Begin PaneConfiguration = 2
-         NumPanes = 3
-         Configuration = "(H (1 [50] 2 [25] 3))"
-      End
-      Begin PaneConfiguration = 3
-         NumPanes = 3
-         Configuration = "(H (4 [30] 2 [40] 3))"
-      End
-      Begin PaneConfiguration = 4
-         NumPanes = 2
-         Configuration = "(H (1 [56] 3))"
-      End
-      Begin PaneConfiguration = 5
-         NumPanes = 2
-         Configuration = "(H (2 [66] 3))"
-      End
-      Begin PaneConfiguration = 6
-         NumPanes = 2
-         Configuration = "(H (4 [50] 3))"
-      End
-      Begin PaneConfiguration = 7
-         NumPanes = 1
-         Configuration = "(V (3))"
-      End
-      Begin PaneConfiguration = 8
-         NumPanes = 3
-         Configuration = "(H (1[56] 4[18] 2) )"
-      End
-      Begin PaneConfiguration = 9
-         NumPanes = 2
-         Configuration = "(H (1 [75] 4))"
-      End
-      Begin PaneConfiguration = 10
-         NumPanes = 2
-         Configuration = "(H (1[66] 2) )"
-      End
-      Begin PaneConfiguration = 11
-         NumPanes = 2
-         Configuration = "(H (4 [60] 2))"
-      End
-      Begin PaneConfiguration = 12
-         NumPanes = 1
-         Configuration = "(H (1) )"
-      End
-      Begin PaneConfiguration = 13
-         NumPanes = 1
-         Configuration = "(V (4))"
-      End
-      Begin PaneConfiguration = 14
-         NumPanes = 1
-         Configuration = "(V (2))"
-      End
-      ActivePaneConfig = 0
-   End
-   Begin DiagramPane = 
-      Begin Origin = 
-         Top = 0
-         Left = 0
-      End
-      Begin Tables = 
-         Begin Table = "fileInfo"
-            Begin Extent = 
-               Top = 20
-               Left = 30
-               Bottom = 242
-               Right = 277
-            End
-            DisplayFlags = 280
-            TopColumn = 3
-         End
-         Begin Table = "fileType"
-            Begin Extent = 
-               Top = 7
-               Left = 370
-               Bottom = 165
-               Right = 617
-            End
-            DisplayFlags = 280
-            TopColumn = 0
-         End
-         Begin Table = "uenType"
-            Begin Extent = 
-               Top = 144
-               Left = 644
-               Bottom = 302
-               Right = 891
-            End
-            DisplayFlags = 280
-            TopColumn = 0
-         End
-         Begin Table = "docType"
-            Begin Extent = 
-               Top = 253
-               Left = 361
-               Bottom = 411
-               Right = 608
-            End
-            DisplayFlags = 280
-            TopColumn = 0
-         End
-      End
-   End
-   Begin SQLPane = 
-   End
-   Begin DataPane = 
-      Begin ParameterDefaults = ""
-      End
-      Begin ColumnWidths = 10
-         Width = 284
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-      End
-   End
-   Begin CriteriaPane = 
-      Begin ColumnWidths = 11
-         Column = 1440
-         Alias = 900
-         Table = 1170
-         Output = 720
-         Append = 1400
-         NewValue = 1170
-         SortType = 1350
-         SortOrder = 1410
-         GroupBy = 1350
-         Filter = 1350
-         Or = 1350
-         Or = 1350
-     ' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'view_fileInfo'
-GO
-EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPane2', @value=N'    Or = 1350
-      End
-   End
-End
-' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'view_fileInfo'
-GO
-EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPaneCount', @value=2 , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'view_fileInfo'
-GO
-USE [master]
-GO
-ALTER DATABASE [DigitalImage] SET  READ_WRITE 
-GO
+
+        private void setupListView()
+        {
+            listView1.Dock = System.Windows.Forms.DockStyle.Fill;
+
+            listView1.View = View.LargeIcon;
+            listView1.MultiSelect = false;
+            listView1.ListViewItemSorter = new ListViewIndexComparer();
+
+            listView1.InsertionMark.Color = Color.Green;
+
+            listView1.AllowDrop = true;
+            listView1.ItemDrag += new ItemDragEventHandler(listView1_ItemDrag);
+            listView1.DragEnter += new DragEventHandler(listView1_DragEnter);
+            listView1.DragOver += new DragEventHandler(listView1_DragOver);
+            listView1.DragLeave += new EventHandler(listView1_DragLeave);
+            listView1.DragDrop += new DragEventHandler(listView1_DragDrop);
+
+            listView1.KeyDown += listView1_KeyDown;
+
+
+            
+        }
+
+
+        /// <summary>
+        /// ListView SetUp Functions
+        /// </summary>
+
+
+        // Starts the drag-and-drop operation when an item is dragged.
+        private void listView1_ItemDrag(object sender, ItemDragEventArgs e)
+        {
+            listView1.DoDragDrop(e.Item, DragDropEffects.Move);
+        }
+
+        // Sets the target drop effect.
+        private void listView1_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = e.AllowedEffect;
+        }
+
+        // Moves the insertion mark as the item is dragged.
+        private void listView1_DragOver(object sender, DragEventArgs e)
+        {
+            // Retrieve the client coordinates of the mouse pointer.
+            Point targetPoint =
+                listView1.PointToClient(new Point(e.X, e.Y));
+
+            // Retrieve the index of the item closest to the mouse pointer.
+            int targetIndex = listView1.InsertionMark.NearestIndex(targetPoint);
+
+            // Confirm that the mouse pointer is not over the dragged item.
+            if (targetIndex > -1)
+            {
+                // Determine whether the mouse pointer is to the left or
+                // the right of the midpoint of the closest item and set
+                // the InsertionMark.AppearsAfterItem property accordingly.
+                Rectangle itemBounds = listView1.GetItemRect(targetIndex);
+                if (targetPoint.X > itemBounds.Left + (itemBounds.Width / 2))
+                {
+                    listView1.InsertionMark.AppearsAfterItem = true;
+                }
+                else
+                {
+                    listView1.InsertionMark.AppearsAfterItem = false;
+                }
+            }
+
+            // Set the location of the insertion mark. If the mouse is
+            // over the dragged item, the targetIndex value is -1 and
+            // the insertion mark disappears.
+            listView1.InsertionMark.Index = targetIndex;
+        }
+
+        // Removes the insertion mark when the mouse leaves the control.
+        private void listView1_DragLeave(object sender, EventArgs e)
+        {
+            listView1.InsertionMark.Index = -1;
+        }
+
+        // Moves the item to the location of the insertion mark.
+        private void listView1_DragDrop(object sender, DragEventArgs e)
+        {
+            // Retrieve the index of the insertion mark;
+            int targetIndex = listView1.InsertionMark.Index;
+
+            // If the insertion mark is not visible, exit the method.
+            if (targetIndex == -1)
+            {
+                return;
+            }
+
+            // If the insertion mark is to the right of the item with
+            // the corresponding index, increment the target index.
+            if (listView1.InsertionMark.AppearsAfterItem)
+            {
+                targetIndex++;
+            }
+
+            // Retrieve the dragged item.
+            ListViewItem draggedItem =
+                (ListViewItem)e.Data.GetData(typeof(ListViewItem));
+
+            // Insert a copy of the dragged item at the target index.
+            // A copy must be inserted before the original item is removed
+            // to preserve item index values. 
+            listView1.Items.Insert(
+                targetIndex, (ListViewItem)draggedItem.Clone());
+
+            // Remove the original copy of the dragged item.
+            listView1.Items.Remove(draggedItem);
+        }
+
+        // Sorts ListViewItem objects by index.
+        private class ListViewIndexComparer : System.Collections.IComparer
+        {
+            public int Compare(object x, object y)
+            {
+                return ((ListViewItem)x).Index - ((ListViewItem)y).Index;
+            }
+        }
+
+        private void listView1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (Keys.Delete == e.KeyCode)
+            {
+                foreach (ListViewItem listViewItem in ((ListView)sender).SelectedItems)
+                {
+
+                    var result  = MessageBox.Show("Delete file: "+ listViewItem.Text , "Are you sure?", MessageBoxButtons.OKCancel); //Gets users input by showing the message box
+
+                    if (result == DialogResult.OK) //Creates the yes function
+                    {
+                       
+                        listViewItem.Remove();
+                        
+                        string deleteFile = @"C:\Scan\" + selectedImagePath + "\\" + listViewItem.Text;
+                        if (File.Exists(deleteFile))
+                        {
+                            File.Delete(deleteFile);
+                        }
+                        treeView1.Refresh();
+                    }
+
+                    else if (result == DialogResult.Cancel)
+                    {
+                        this.Close();
+                    }
+                    
+                }
+            }
+        }
+
+
+
+
+
+ private void treeView1_AfterSelect_1(System.Object sender, System.Windows.Forms.TreeViewEventArgs e)
+        {
+
+            //this.listView1.Items.Clear();
+            List<string> names = new List<string>();
+            
+            if (e.Node.Nodes.Count != 0)
+            {
+                selectedImagePath = e.Node.Text;
+                this.imageList1.Images.Clear();
+                listView1.Clear();
+                for (int i = 0; i < e.Node.Nodes.Count; i++)
+                {
+                    string imagePath = e.Node.Nodes[i].Name;
+                    if (imagePath.EndsWith(".jpeg"))
+                    {
+                        if (System.IO.File.Exists(imagePath))
+                        {
+
+                            string imageName = Path.GetFileName(imagePath).ToLower();
+                            this.imageList1.Images.Add(imageName,Image.FromFile(imagePath));
+                            names.Add(imageName);
+
+                        }
+                    }
+                }
+                if (e.Node.Name.EndsWith("png"))
+                {
+                    //this.richTextBox1.Clear();
+                    StreamReader reader = new StreamReader(e.Node.Name);
+                    //this.richTextBox1.Text = reader.ReadToEnd();
+                    reader.Close();
+                }
+                // tell your ListView to use the new image list
+                imageList1.ImageSize = new Size(200, 250);
+                int count = 1;
+                listView1.LargeImageList = imageList1;
+
+                foreach (string s in names)
+                {
+                    ListViewItem lst = new ListViewItem();
+                    lst.Text = s;
+                    lst.ImageIndex = count++;
+                    listView1.Items.Add(lst);
+                }
+
+
+            }
+
+        }
