@@ -17,7 +17,9 @@ using PdfSharp.Drawing;
 using ZXing;
 using digital_imaging.Images;
 using TWAINWorkingGroup;
-
+using digital_imaging.Models;
+using System.Data.Entity;
+using System.Xml;
 
 namespace digital_imaging
 {
@@ -26,6 +28,46 @@ namespace digital_imaging
         string fPath = System.Configuration.ConfigurationSettings.AppSettings["fPath"];
         string rPath = System.Configuration.ConfigurationSettings.AppSettings["rPath"];
         private ScannedImageList imageList = new ScannedImageList();
+        DigitalImageEntities _entity = new DigitalImageEntities();
+        DateTimePicker dateTimePicer = new DateTimePicker();
+
+
+        //////////////////////////////////////////////////////////////////////////////
+        // Private Attributes...
+        ///////////////////////////////////////////////////////////////////////////////
+        #region Private Attributes...
+
+        private bool m_blExit;
+
+        private TWAIN m_twain;
+        private IntPtr m_intptrHwnd;
+        private bool m_blDisableDsSent = false;
+        private bool m_blXferReadySent = false;
+        private IntPtr m_intptrXfer = IntPtr.Zero;
+        private IntPtr m_intptrImage = IntPtr.Zero;
+        private int m_iImageBytes = 0;
+        private TWAIN.TW_SETUPMEMXFER m_twsetupmemxfer;
+
+        // Setup information...
+        private FormSetup m_formsetup;
+
+        private string m_szProductDirectory;
+
+        private bool m_blIndicators;
+
+        private Bitmap m_bitmapGraphic1;
+        private Bitmap m_bitmapGraphic2;
+        private Graphics m_graphics1;
+        private Graphics m_graphics2;
+        private Brush m_brushBackground;
+        private Rectangle m_rectangleBackground;
+        private int m_iUseBitmap;
+        private int m_iImageCount = 0;
+        private string pathName = System.Configuration.ConfigurationSettings.AppSettings["fPath"];
+        private String _gUniqueID = "";
+        private String _gImageList = "";
+
+        public delegate void RunInUiThreadDelegate(Object a_object, Action a_action);
 
         public MainForm()
         {
@@ -99,6 +141,7 @@ namespace digital_imaging
 
             // Init our buttons...
             SetButtons(EBUTTONSTATE.CLOSED);
+            loadGrid();
 
 
         }
@@ -130,7 +173,7 @@ namespace digital_imaging
             ScanCallback((m_twain == null) ? true : (m_twain.GetState() <= TWAIN.STATE.S3));
         }
 
-       
+
         public void Rollback(TWAIN.STATE a_state)
         {
             TWAIN.TW_PENDINGXFERS twpendingxfers = default(TWAIN.TW_PENDINGXFERS);
@@ -178,7 +221,7 @@ namespace digital_imaging
             }
         }
 
-       
+
         [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
         public bool PreFilterMessage(ref Message a_message)
         {
@@ -189,13 +232,13 @@ namespace digital_imaging
             return (true);
         }
 
-    
+
         private void RunInUiThread(Action a_action)
         {
             RunInUiThread(this, a_action);
         }
 
-       
+
         static public void RunInUiThread(Object a_object, Action a_action)
         {
             Control control = (Control)a_object;
@@ -207,7 +250,7 @@ namespace digital_imaging
             a_action();
         }
 
-     
+
         public void SetMessageFilter(bool a_blAdd)
         {
             if (a_blAdd)
@@ -220,7 +263,7 @@ namespace digital_imaging
             }
         }
 
-    
+
         [PermissionSet(SecurityAction.LinkDemand, Name = "FullTrust", Unrestricted = false)]
         public TWAIN.STS RestoreSnapshot(string a_szFile)
         {
@@ -276,7 +319,7 @@ namespace digital_imaging
             return (sts);
         }
 
-     
+
         [PermissionSet(SecurityAction.LinkDemand, Name = "FullTrust", Unrestricted = false)]
         public TWAIN.STS SaveSnapshot(string a_szFile)
         {
@@ -325,7 +368,7 @@ namespace digital_imaging
             return (TWAIN.STS.SUCCESS);
         }
 
-        
+
         private TWAIN.STS DeviceEventCallback()
         {
             TWAIN.STS sts;
@@ -347,7 +390,7 @@ namespace digital_imaging
             return (TWAIN.STS.SUCCESS);
         }
 
-   
+
         private TWAIN.STS ScanCallbackTrigger(bool a_blClosing)
         {
             BeginInvoke(new MethodInvoker(delegate { ScanCallbackEventHandler(this, new EventArgs()); }));
@@ -455,7 +498,7 @@ namespace digital_imaging
             return (TWAIN.STS.SUCCESS);
         }
 
-   
+
         private void SetButtons(EBUTTONSTATE a_ebuttonstate)
         {
             switch (a_ebuttonstate)
@@ -493,7 +536,7 @@ namespace digital_imaging
             }
         }
 
-       
+
         private void CaptureImages()
         {
             TWAIN.STS sts;
@@ -653,7 +696,7 @@ namespace digital_imaging
 
                     // Write it out...
                     string szFilename = Path.Combine(m_formsetup.GetImageFolder(), "img" + string.Format("{0:D6}", m_iImageCount));
-                    
+
                     TWAIN.WriteImageFile(szFilename, m_intptrImage, m_iImageBytes, out szFilename);
                 }
 
@@ -672,29 +715,14 @@ namespace digital_imaging
                 var result = reader.Decode(bitmap);
                 if (result != null)
                 {
-                    pathName = fPath + result.ToString();
-                    Directory.CreateDirectory(pathName);
+                    createFileInfo(result.ToString());
                 }
                 else
                 {
                     SaveImage(bitmap, pathName);
                 }
 
-                
 
-                /*
-                // Display the image...
-                if (m_iUseBitmap == 0)
-                {
-                    m_iUseBitmap = 1;
-                    /LoadImage(ref m_pictureboxImage1, ref m_graphics1, ref m_bitmapGraphic1, bitmap);
-                }
-                else
-                {
-                    m_iUseBitmap = 0;
-                    //LoadImage(ref m_pictureboxImage2, ref m_graphics2, ref m_bitmapGraphic2, bitmap);
-                }
-                */
 
                 // Cleanup...
                 bitmap.Dispose();
@@ -707,17 +735,17 @@ namespace digital_imaging
                 // Looks like we're done!
                 if (twpendingxfers.Count == 0)
                 {
+                    loadGrid();
                     m_blDisableDsSent = true;
                     m_twain.DatUserinterface(TWAIN.DG.CONTROL, TWAIN.MSG.DISABLEDS, ref twuserinterface);
                     SetButtons(EBUTTONSTATE.OPEN);
-                    treeView1.Refresh();
                     return;
                 }
-                
+
             }
         }
 
-      
+
         [SuppressMessage("Microsoft.Security", "CA2123:OverrideLinkDemandsShouldBeIdenticalToBase")]
         [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
         protected override void Dispose(bool disposing)
@@ -749,7 +777,7 @@ namespace digital_imaging
             base.Dispose(disposing);
         }
 
-     
+
         public bool ExitRequested()
         {
             return (m_blExit);
@@ -766,8 +794,10 @@ namespace digital_imaging
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            treeLoad();
             this.imageList1.ImageSize = new Size(32, 32);
+
+            dateTimePicer.ValueChanged += dateTimePicer_ValueChanged;
+            listMenu.Items.Add(new ToolStripControlHost(dateTimePicer));
         }
 
         static ImageList _imageList;
@@ -778,7 +808,7 @@ namespace digital_imaging
                 if (_imageList == null)
                 {
                     _imageList = new ImageList();
-                   
+
                     _imageList.Images.Add("Application", Properties.Resources.folder_icon_1320191242863903371);
                 }
                 return _imageList;
@@ -798,68 +828,18 @@ namespace digital_imaging
             }
         }
 
-        private void treeLoad()
-        {
-            DirectoryInfo directoryInfo = new DirectoryInfo(fPath);
-            if (directoryInfo.Exists)
-            {
-                treeView1.AfterSelect += treeView1_AfterSelect_1;
-                BuildTree(directoryInfo, treeView1.Nodes);
-                treeView1.ImageList = MainForm.ImageList;
-            }
-            
-        }
-     
 
-        //image list 
 
-        private void treeView1_AfterSelect_1(System.Object sender, System.Windows.Forms.TreeViewEventArgs e)
-        {
 
-            //this.listView1.Items.Clear();
-            this.imageList1.Images.Clear();
-            imageList = new ScannedImageList();
-            UpdateThumbnails();
-            if (e.Node.Nodes.Count != 0)
-            {
-               
-                for (int i = 0; i < e.Node.Nodes.Count; i++)
-                {
-                    ListViewItem lvi = new ListViewItem();
-                    string imagePath = e.Node.Nodes[i].Name;
-                    if (imagePath.EndsWith(".jpeg")|| imagePath.EndsWith(".jpg") || imagePath.EndsWith(".png") || imagePath.EndsWith(".tiff"))
-                    {
-                        if (System.IO.File.Exists(imagePath))
-                        {
 
-                            imageList.Images.Add(Image.FromFile(imagePath));
 
-                        }
-                    }
-                }
-                if (e.Node.Name.EndsWith("png") || e.Node.Name.EndsWith("tiff") || e.Node.Name.EndsWith("jpg")|| e.Node.Name.EndsWith("jpeg"))
-                {
-                    //this.richTextBox1.Clear();
-                    StreamReader reader = new StreamReader(e.Node.Name);
-                    //this.richTextBox1.Text = reader.ReadToEnd();
-                    reader.Close();
-                }
 
-                UpdateThumbnails();
-            }
-
-        }
-
-     
-
+        //start scan..............
         private void tsScan_ButtonClick(object sender, EventArgs e)
         {
             m_iUseBitmap = 0;
             string szTwmemref;
             TWAIN.STS sts;
-
-            // Silently start scanning if we detect that customdsdata is supported,
-            // otherwise bring up the driver GUI so the user can change settings...
             if (m_formsetup.IsCustomDsDataSupported())
             {
                 szTwmemref = "FALSE,FALSE," + this.Handle;
@@ -879,8 +859,9 @@ namespace digital_imaging
                 SetButtons(EBUTTONSTATE.SCANNING);
             }
         }
+        //start scan..............
 
-
+        //scanner connect
         private void scannerItem_Click(object sender, EventArgs e)
         {
             string szIdentity;
@@ -1017,17 +998,11 @@ namespace digital_imaging
             m_formsetup = new FormSetup(this, ref m_twain, m_szProductDirectory);
         }
 
-        private void SaveImage(Bitmap bitmap, string pathName)
-        {
-            
-                string fName = String.Format("scan-{0}.jpeg", new Random().Next().ToString());
-                bitmap.Save(pathName+ "\\" + fName, ImageFormat.Jpeg);
-
-            
-            
-        }
+        //scanner connect
 
 
+
+        //gen pdf
         private void generatePDF()
         {
             String fodLocation = fPath;
@@ -1059,29 +1034,15 @@ namespace digital_imaging
                 doc.Save(dir + "\\" + fodName + ".PDF");
                 doc.Close();
             }
-            treeView1.Refresh();
 
         }
-
-        private void LoadImage(ref PictureBox a_picturebox, ref Graphics a_graphics, ref Bitmap a_bitmapGraphic, Bitmap a_bitmap)
-        {
-            // We want to maintain the aspect ratio...
-            double fRatioWidth = (double)a_bitmapGraphic.Size.Width / (double)a_bitmap.Width;
-            double fRatioHeight = (double)a_bitmapGraphic.Size.Height / (double)a_bitmap.Height;
-            double fRatio = (fRatioWidth < fRatioHeight) ? fRatioWidth : fRatioHeight;
-            int iWidth = (int)(a_bitmap.Width * fRatio);
-            int iHeight = (int)(a_bitmap.Height * fRatio);
-
-            // Display the image...
-            a_graphics.FillRectangle(m_brushBackground, m_rectangleBackground);
-            a_graphics.DrawImage(a_bitmap, new Rectangle(((int)a_bitmapGraphic.Width - iWidth) / 2, ((int)a_bitmapGraphic.Height - iHeight) / 2, iWidth, iHeight));
-            a_picturebox.Image = a_bitmapGraphic;
-            a_picturebox.Update();
-        }
+        //gen pdf
 
         /// <summary>
         /// Our button states...
         /// </summary>
+        /// 
+
         private enum EBUTTONSTATE
         {
             CLOSED,
@@ -1091,42 +1052,6 @@ namespace digital_imaging
 
 
 
-        //////////////////////////////////////////////////////////////////////////////
-        // Private Attributes...
-        ///////////////////////////////////////////////////////////////////////////////
-        #region Private Attributes...
-
-        private bool m_blExit;
-
-        private TWAIN m_twain;
-        private IntPtr m_intptrHwnd;
-        private bool m_blDisableDsSent = false;
-        private bool m_blXferReadySent = false;
-        private IntPtr m_intptrXfer = IntPtr.Zero;
-        private IntPtr m_intptrImage = IntPtr.Zero;
-        private int m_iImageBytes = 0;
-        private TWAIN.TW_SETUPMEMXFER m_twsetupmemxfer;
-
-        // Setup information...
-        private FormSetup m_formsetup;
-
-        private string m_szProductDirectory;
-
-        private bool m_blIndicators;
-
-        private Bitmap m_bitmapGraphic1;
-        private Bitmap m_bitmapGraphic2;
-        private Graphics m_graphics1;
-        private Graphics m_graphics2;
-        private Brush m_brushBackground;
-        private Rectangle m_rectangleBackground;
-        private int m_iUseBitmap;
-        private int m_iImageCount = 0;
-        private string pathName = System.Configuration.ConfigurationSettings.AppSettings["fPath"];
-
-     
-        public delegate void RunInUiThreadDelegate(Object a_object, Action a_action);
-
         #endregion
 
         private void tsSavePDF_Click(object sender, EventArgs e)
@@ -1134,144 +1059,6 @@ namespace digital_imaging
             generatePDF();
         }
 
-
-        private IEnumerable<int> SelectedIndices
-        {
-            get
-            {
-                return thumbnailList1.SelectedIndices.OfType<int>();
-            }
-            set
-            {
-                thumbnailList1.SelectedIndices.Clear();
-                foreach (int i in value)
-                {
-                    thumbnailList1.SelectedIndices.Add(i);
-                }
-            }
-        }
-
-        private void UpdateThumbnails()
-        {
-            // TODO: Make incremental updates (i.e. appends) faster if there are many images
-            thumbnailList1.UpdateImages(imageList.Images);
-        }
-
-        private void UpdateThumbnails(IEnumerable<int> selection)
-        {
-            UpdateThumbnails();
-            SelectedIndices = selection;
-        }
-
-        private void Clear()
-        {
-            if (imageList.Images.Count > 0)
-            {
-                if (MessageBox.Show(string.Format("Confirm", imageList.Images.Count), "Clear", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
-                {
-                    imageList.Delete(Enumerable.Range(0, imageList.Images.Count));
-                    UpdateThumbnails();
-                }
-            }
-        }
-
-        private void Delete()
-        {
-            if (SelectedIndices.Any())
-            {
-                if (MessageBox.Show(string.Format("Delete?", SelectedIndices.Count()), "Delete", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
-                {
-                    imageList.Delete(SelectedIndices);
-                    UpdateThumbnails();
-                }
-            }
-        }
-
-        private void SelectAll()
-        {
-            UpdateThumbnails(Enumerable.Range(0, imageList.Images.Count));
-        }
-
-        private void MoveDown()
-        {
-            UpdateThumbnails(imageList.MoveDown(SelectedIndices));
-        }
-
-        private void MoveUp()
-        {
-            UpdateThumbnails(imageList.MoveUp(SelectedIndices));
-        }
-
-        private void RotateLeft()
-        {
-            UpdateThumbnails(imageList.RotateFlip(SelectedIndices, RotateFlipType.Rotate270FlipNone));
-        }
-
-        private void RotateRight()
-        {
-            UpdateThumbnails(imageList.RotateFlip(SelectedIndices, RotateFlipType.Rotate90FlipNone));
-        }
-
-        private void Flip()
-        {
-            UpdateThumbnails(imageList.RotateFlip(SelectedIndices, RotateFlipType.RotateNoneFlipXY));
-        }
-
-        private void thumbnailList1_KeyDown(object sender, KeyEventArgs e)
-        {
-            switch (e.KeyCode)
-            {
-                case Keys.Delete:
-                    Delete();
-                    break;
-                case Keys.Left:
-                    if (e.Control)
-                    {
-                        MoveUp();
-                    }
-                    break;
-                case Keys.Right:
-                    if (e.Control)
-                    {
-                        MoveDown();
-                    }
-                    break;
-                case Keys.A:
-                    if (e.Control)
-                    {
-                        SelectAll();
-                    }
-                    break;
-            }
-        }
-
-        private void thumbnailList1_ItemActivate(object sender, EventArgs e)
-        {
-            /*if (SelectedIndices.Any())
-            {
-                using (var image = imageList.Images[SelectedIndices.First()].GetImage())
-                {
-                    var viewer = FormFactory.Create<FViewer>();
-                    viewer.Image = image;
-                    viewer.ShowDialog();
-                }
-            }*/
-        }
-
-        private void toolStripButton1_Click(object sender, EventArgs e)
-        {
-            MoveUp();
-        }
-
-        private void toolStripButton2_Click(object sender, EventArgs e)
-        {
-            MoveDown();
-        }
-
-        private void tsDelete_Click(object sender, EventArgs e)
-        {
-            Delete();
-        }
 
         private void dEntry_Click(object sender, EventArgs e)
         {
@@ -1285,5 +1072,66 @@ namespace digital_imaging
                 dEn.BringToFront();
             }
         }
+
+
+        //SOE HTET
+
+        private void dateTimePicer_ValueChanged(object sender, EventArgs e)
+        {
+            loadGrid();
+        }
+
+        private void SaveImage(Bitmap bitmap, string pathName)
+        {
+            string fName = String.Format("scan-{0}.jpeg", new Random().Next().ToString());
+            bitmap.Save(pathName + "\\" + fName, ImageFormat.Jpeg);
+            updateFileInfo(fName);
+        }
+
+        private void loadGrid()
+        {
+            string _format = "yyyy-mm-dd";
+            _format = DateTime.Now.ToString();
+            List<view_fileInfo> _fileInfoList = new List<view_fileInfo>();
+            _fileInfoList = _entity.view_fileInfo.Where(x => (x.pro_date != null && DbFunctions.DiffDays(x.pro_date, dateTimePicer.Value) == 0)).ToList();
+            scanItemGrid.DataSource = _fileInfoList;
+        }
+
+        private void createFileInfo(String runNum)
+        {
+            string timestamp = DateTime.UtcNow.ToString("hh.mm.ss.ffffff").Replace(".", "");
+            string _format = "Mddyyyy";
+            string _uniqueId = String.Format("{0}-{1}-{2}", DateTime.Now.ToString(_format), runNum, timestamp);
+            _gUniqueID = _uniqueId;
+
+            pathName = fPath + _uniqueId;
+            Directory.CreateDirectory(pathName);
+
+            fileInfo _fileInfo = new fileInfo();
+            _fileInfo.fileUniqueID = _uniqueId;
+            _fileInfo.rumNum = runNum;
+            _fileInfo.status = 0;
+            _fileInfo.pro_date = DateTime.Now;
+            _fileInfo.created_at = DateTime.Now;
+            _entity.fileInfoes.Add(_fileInfo);
+            _entity.SaveChanges();
+        }
+
+        private void updateFileInfo(String fileName)
+        {
+            fileInfo _fileInfo = _entity.fileInfoes.Where(x => x.fileUniqueID == _gUniqueID).FirstOrDefault();
+            if (_fileInfo != null)
+            {
+                String current = _fileInfo.imageList + fileName + ",";
+                _fileInfo.imageList = current;
+            }
+            _entity.SaveChanges();
+        }
+
+
+
+
+        //SOE HTET
+
     }
 }

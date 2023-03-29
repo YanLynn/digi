@@ -60,18 +60,15 @@
             this.dEntry = new System.Windows.Forms.ToolStripButton();
             this.tsDenq = new System.Windows.Forms.ToolStripButton();
             this.tsAbout = new System.Windows.Forms.ToolStripButton();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.thumbnailList1 = new digital_imaging.ThumbnailList();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.ListVeiwPnl = new System.Windows.Forms.Panel();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.listMenu = new System.Windows.Forms.ToolStrip();
+            this.scanItemGrid = new System.Windows.Forms.DataGridView();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tStrip.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
+            this.ListVeiwPnl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.scanItemGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -88,7 +85,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.menuStrip1.Size = new System.Drawing.Size(1203, 40);
+            this.menuStrip1.Size = new System.Drawing.Size(1203, 38);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -106,7 +103,7 @@
             this.toolStripSeparator2,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(60, 36);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(60, 34);
             this.fileToolStripMenuItem.Text = "&File";
             // 
             // newToolStripMenuItem
@@ -192,7 +189,7 @@
             this.toolStripSeparator4,
             this.selectAllToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(64, 36);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(64, 34);
             this.editToolStripMenuItem.Text = "&Edit";
             // 
             // undoToolStripMenuItem
@@ -258,7 +255,7 @@
             this.customizeToolStripMenuItem,
             this.optionsToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(76, 36);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(76, 34);
             this.toolsToolStripMenuItem.Text = "&Tools";
             // 
             // customizeToolStripMenuItem
@@ -282,7 +279,7 @@
             this.toolStripSeparator5,
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(72, 36);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(72, 34);
             this.helpToolStripMenuItem.Text = "&Help";
             // 
             // contentsToolStripMenuItem
@@ -317,7 +314,7 @@
             // scannerItem
             // 
             this.scannerItem.Name = "scannerItem";
-            this.scannerItem.Size = new System.Drawing.Size(186, 36);
+            this.scannerItem.Size = new System.Drawing.Size(186, 34);
             this.scannerItem.Text = "Connect Scanner";
             this.scannerItem.Click += new System.EventHandler(this.scannerItem_Click);
             // 
@@ -325,7 +322,7 @@
             // 
             this.panel1.Controls.Add(this.tStrip);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 40);
+            this.panel1.Location = new System.Drawing.Point(0, 38);
             this.panel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1203, 100);
@@ -363,6 +360,7 @@
             this.tsScan.Size = new System.Drawing.Size(81, 95);
             this.tsScan.Text = "Scan";
             this.tsScan.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.tsScan.Click += new System.EventHandler(this.tsScan_ButtonClick);
             // 
             // toolStripSeparator6
             // 
@@ -399,7 +397,6 @@
             this.tsDelete.Size = new System.Drawing.Size(97, 95);
             this.tsDelete.Text = "Delete";
             this.tsDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.tsDelete.Click += new System.EventHandler(this.tsDelete_Click);
             // 
             // dEntry
             // 
@@ -432,74 +429,17 @@
             this.tsAbout.Text = "About";
             this.tsAbout.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
-            // panel2
+            // ListVeiwPnl
             // 
-            this.panel2.AutoScroll = true;
-            this.panel2.Controls.Add(this.thumbnailList1);
-            this.panel2.Controls.Add(this.toolStrip1);
-            this.panel2.Controls.Add(this.treeView1);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 140);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1203, 594);
-            this.panel2.TabIndex = 3;
-            // 
-            // thumbnailList1
-            // 
-            this.thumbnailList1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.thumbnailList1.HideSelection = false;
-            this.thumbnailList1.Location = new System.Drawing.Point(343, 33);
-            this.thumbnailList1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.thumbnailList1.Name = "thumbnailList1";
-            this.thumbnailList1.Size = new System.Drawing.Size(860, 561);
-            this.thumbnailList1.TabIndex = 1;
-            this.thumbnailList1.UseCompatibleStateImageBehavior = false;
-            // 
-            // toolStrip1
-            // 
-            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton3,
-            this.toolStripButton1});
-            this.toolStrip1.Location = new System.Drawing.Point(343, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.toolStrip1.Size = new System.Drawing.Size(860, 33);
-            this.toolStrip1.TabIndex = 2;
-            this.toolStrip1.Text = "toolStrip1";
-            // 
-            // toolStripButton3
-            // 
-            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton3.Image = global::digital_imaging.Properties.Resources.arrow_left;
-            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(34, 28);
-            this.toolStripButton3.Text = "toolStripButton1";
-            this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton1_Click);
-            // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = global::digital_imaging.Properties.Resources.arrow_right;
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(34, 28);
-            this.toolStripButton1.Text = "toolStripButton1";
-            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton2_Click);
-            // 
-            // treeView1
-            // 
-            this.treeView1.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.treeView1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.treeView1.LineColor = System.Drawing.Color.Beige;
-            this.treeView1.Location = new System.Drawing.Point(0, 0);
-            this.treeView1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(343, 594);
-            this.treeView1.TabIndex = 0;
-            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect_1);
+            this.ListVeiwPnl.AutoScroll = true;
+            this.ListVeiwPnl.Controls.Add(this.scanItemGrid);
+            this.ListVeiwPnl.Controls.Add(this.listMenu);
+            this.ListVeiwPnl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ListVeiwPnl.Location = new System.Drawing.Point(0, 138);
+            this.ListVeiwPnl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.ListVeiwPnl.Name = "ListVeiwPnl";
+            this.ListVeiwPnl.Size = new System.Drawing.Size(1203, 596);
+            this.ListVeiwPnl.TabIndex = 3;
             // 
             // imageList1
             // 
@@ -507,12 +447,33 @@
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
+            // listMenu
+            // 
+            this.listMenu.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.listMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.listMenu.Location = new System.Drawing.Point(0, 0);
+            this.listMenu.Name = "listMenu";
+            this.listMenu.Size = new System.Drawing.Size(1203, 25);
+            this.listMenu.TabIndex = 0;
+            this.listMenu.Text = "toolStrip1";
+            // 
+            // scanItemGrid
+            // 
+            this.scanItemGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.scanItemGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scanItemGrid.Location = new System.Drawing.Point(0, 25);
+            this.scanItemGrid.Name = "scanItemGrid";
+            this.scanItemGrid.RowHeadersWidth = 62;
+            this.scanItemGrid.RowTemplate.Height = 28;
+            this.scanItemGrid.Size = new System.Drawing.Size(1203, 571);
+            this.scanItemGrid.TabIndex = 1;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1203, 734);
-            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.ListVeiwPnl);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
             this.ForeColor = System.Drawing.Color.Black;
@@ -529,10 +490,9 @@
             this.panel1.PerformLayout();
             this.tStrip.ResumeLayout(false);
             this.tStrip.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
+            this.ListVeiwPnl.ResumeLayout(false);
+            this.ListVeiwPnl.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.scanItemGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -577,17 +537,14 @@
         private System.Windows.Forms.ToolStripButton tsSaveImage;
         private System.Windows.Forms.ToolStripButton tsDelete;
         private System.Windows.Forms.ToolStripButton dEntry;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.TreeView treeView1;
+        private System.Windows.Forms.Panel ListVeiwPnl;
         private System.Windows.Forms.ImageList imageList1;
-        private ThumbnailList thumbnailList1;
-        private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton toolStripButton3;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.ToolStripButton tsAbout;
         private System.Windows.Forms.ToolStripMenuItem scannerItem;
         private System.Windows.Forms.ToolStripButton tsScan;
         private System.Windows.Forms.ToolStripButton tsDenq;
+        private System.Windows.Forms.DataGridView scanItemGrid;
+        private System.Windows.Forms.ToolStrip listMenu;
     }
 }
 

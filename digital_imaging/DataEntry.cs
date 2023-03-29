@@ -2,72 +2,202 @@
 using digital_imaging.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using ListView = System.Windows.Forms.ListView;
 
 namespace digital_imaging
 {
     public partial class DataEntry : Form
     {
         DigitalImageEntities db = new DigitalImageEntities();
-        
+        ColumnHeader columnheader;
+        private ListViewColumnSorter lvwColumnSorter;
         string fPath = System.Configuration.ConfigurationSettings.AppSettings["fPath"];
 
         public DataEntry()
         {
             InitializeComponent();
+           
+
+
+            dEnList.View = View.Details;
+
+            columnheader = new ColumnHeader();
+            columnheader.Text = "Name";
+            dEnList.Columns.Add(columnheader);
+
+            columnheader = new ColumnHeader();
+            columnheader.Text = "Path";
+            dEnList.Columns.Add(columnheader);
+
+            columnheader = new ColumnHeader();
+            columnheader.Text = "Date Modified";
+            dEnList.Columns.Add(columnheader);
+
+            columnheader = new ColumnHeader();
+            columnheader.Text = "Size";
+            dEnList.Columns.Add(columnheader);
+
+            columnheader = new ColumnHeader();
+            columnheader.Text = "Type";
+            dEnList.Columns.Add(columnheader);
+
+            dEnList.FullRowSelect = true;
+            dEnList.GridLines = true;
+
+            dEnList.AllowColumnReorder = true;
+            dEnList.Sorting = SortOrder.Ascending;
+            foreach (ColumnHeader ch in this.dEnList.Columns)
+            {
+                ch.Width = 150;
+
+            }
+
         }
 
         private void DataEntry_Load(object sender, EventArgs e)
         {
             getFileInfo();
+
+
         }
+
+
+
         public void getFileInfo()
         {
-            // DirectoryInfo directoryInfo = new DirectoryInfo(fPath);
-            // List<string> fileName = new List<string>; int a = 0;
-            //foreach (DirectoryInfo subdir in directoryInfo.GetDirectories())
-            //{
+            
+            try
+            {
+                lvwColumnSorter = new ListViewColumnSorter();
+                dEnList.ListViewItemSorter = lvwColumnSorter;
 
+                this.dEnList.Items.Clear();
+                List<Array> fileName = new List<Array>();
+                fileName.Add(db.fileInfoes.Where(x => x.status == 0 & (x.maker == null || x.maker == "")).Select(x => x.fileUniqueID).ToArray());
+                DirectoryInfo directoryInfo = new DirectoryInfo(fPath);
+                if (fileName != null)
+                {
+                    if (directoryInfo.Exists)
+                    {
+                        foreach (DirectoryInfo subdir in directoryInfo.GetDirectories())
+                        {
+                            foreach (string file in fileName[0])
+                            {
+                                if (subdir.Name == file)
+                                {
+                                    DirectoryInfo getFolder = new DirectoryInfo(fPath + file);
+                                    if (getFolder.Exists)
+                                    {
 
-            //    fileName.Add(db.file_info.Where(x => x.run_num == subdir.Name).Select(x => x.run_num).ToString());
+                                        foreach (FileInfo imgs in getFolder.GetFiles())
+                                        {
+                                            if (imgs.Extension == ".png" || imgs.Extension == ".jpeg" || imgs.Extension == ".tiff" || imgs.Extension == ".jpg")
+                                            {
+                                                string[] sizes = { "B", "KB", "MB", "GB", "TB" };
+                                                double len = imgs.Length;
+                                                int order = 0;
+                                                while (len >= 1024 && order < sizes.Length - 1)
+                                                {
+                                                    order++;
+                                                    len = len / 1024;
+                                                }
 
-            //    a++;
+                                                string result = String.Format("{0:0.##} {1}", len, sizes[order]);
+                                                ListViewItem listViewItem1 = new ListViewItem(new string[] { imgs.Name, imgs.FullName, imgs.LastWriteTime.ToString(), result, imgs.Extension }, -1, Color.Empty, Color.Empty, new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, ((System.Byte)(0))));
 
-            //}
+                                                dEnList.Items.AddRange(new ListViewItem[] { listViewItem1 });
+                                                dEnList.Tag = fPath + file;
 
-            //var getFile = from fl in db.file_info where 
-            //dataGridView1.AutoGenerateColumns = true;
-            // dataGridView1.DataSource = db.file_info.ToList();
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("file not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    }
+                                    break;
+                                }
+                                else if (subdir.Name != file)
+                                {
+                                    continue;
+                                }
+                            }
+                            if (dEnList.Items.Count > 0)
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Directory not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Not found entry file!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
 
-            fileInfo fileInfo = new fileInfo();
-            fileInfo.fileUniqueID = Guid.NewGuid().ToString();
-            fileInfo.imageList = "imagelist1,imagelist2,imagelist3";
-            fileInfo.pro_date = DateTime.Now;
-            fileInfo.rumNum = "file-name";
-            fileInfo.fileType_id = 1;
-            fileInfo.uenType_id = 1;
-            fileInfo.uenValue = "test";
-            fileInfo.docType_id = 1;
-            fileInfo.status = 0;
-            fileInfo.maker = "Maker";
-            fileInfo.chacker = "";
-            fileInfo.genPDF = Guid.NewGuid().ToString();
-            fileInfo.created_at = DateTime.Now;
-            db.fileInfoes.Add(fileInfo);
-            db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+        }
 
+        //show image
+        private void dEnList_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
+            if (this != null && dEnList.SelectedItems.Count > 0)
+            {
+                ListViewItem lvi = dEnList.SelectedItems[0];
+                string imagekeyname = dEnList.Tag + "\\" + lvi.Text;
 
+                if (this.pictureBox1.Image != null)
+                {
+                    this.pictureBox1.Image.Dispose();
+                    this.pictureBox1.InitialImage = null;
+                    this.pictureBox1.Image = null;
+                }
+
+                this.pictureBox1.Load(imagekeyname);
+
+            }
 
         }
 
-      
+
+
+        //srot order by column
+        private void dEnList_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+
+            if (e.Column == lvwColumnSorter.SortColumn)
+            {
+                if (lvwColumnSorter.Order == SortOrder.Ascending)
+                {
+                    lvwColumnSorter.Order = SortOrder.Descending;
+                }
+                else
+                {
+                    lvwColumnSorter.Order = SortOrder.Ascending;
+                }
+            }
+            else
+            {
+                lvwColumnSorter.SortColumn = e.Column;
+                lvwColumnSorter.Order = SortOrder.Ascending;
+            }
+
+            this.dEnList.Sort();
+        }
     }
 }
