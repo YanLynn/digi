@@ -31,7 +31,7 @@ namespace digital_imaging.Models
         public Nullable<int> docType_id { get; set; }
         public Nullable<int> status { get; set; }
         public string maker { get; set; }
-        public string chacker { get; set; }
+        public string checker { get; set; }
         public string genPDF { get; set; }
         public Nullable<System.DateTime> created_at { get; set; }
     

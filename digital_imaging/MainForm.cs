@@ -510,7 +510,7 @@ namespace digital_imaging
                     tsSaveImage.Enabled = false;
                     tsDelete.Enabled = false;
                     dEntry.Enabled = true;
-                    tsDenq.Enabled = false;
+                    tsDenq.Enabled = true;
                     tsAbout.Enabled = false;
                     break;
 
@@ -1126,6 +1126,19 @@ namespace digital_imaging
                 _fileInfo.imageList = current;
             }
             _entity.SaveChanges();
+        }
+
+        private void tsDenq_Click(object sender, EventArgs e)
+        {
+            DataEnquiry dEq = new DataEnquiry();
+            if (!dEq.Visible)
+            {
+                dEq.ShowDialog();
+            }
+            else
+            {
+                dEq.BringToFront();
+            }
         }
 
 

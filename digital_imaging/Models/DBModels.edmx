@@ -27,7 +27,7 @@
           <Property Name="docType_id" Type="int" />
           <Property Name="status" Type="int" />
           <Property Name="maker" Type="nvarchar" MaxLength="50" />
-          <Property Name="chacker" Type="nvarchar" MaxLength="50" />
+          <Property Name="checker" Type="nvarchar" MaxLength="50" />
           <Property Name="genPDF" Type="nvarchar" MaxLength="50" />
           <Property Name="created_at" Type="datetime" />
         </EntityType>
@@ -88,7 +88,7 @@ warning 6002: The table/view 'DigitalImage.dbo.view_fileInfo' does not have a pr
           <Property Name="uenValue" Type="nvarchar" MaxLength="50" />
           <Property Name="status" Type="int" />
           <Property Name="maker" Type="nvarchar" MaxLength="50" />
-          <Property Name="chacker" Type="nvarchar" MaxLength="50" />
+          <Property Name="checker" Type="nvarchar" MaxLength="50" />
           <Property Name="genPDF" Type="nvarchar" MaxLength="50" />
           <Property Name="created_at" Type="datetime" />
           <Property Name="fileName" Type="nvarchar" MaxLength="50" />
@@ -161,7 +161,7 @@ warning 6002: The table/view 'DigitalImage.dbo.view_fileInfo' does not have a pr
     [view_fileInfo].[uenValue] AS [uenValue], 
     [view_fileInfo].[status] AS [status], 
     [view_fileInfo].[maker] AS [maker], 
-    [view_fileInfo].[chacker] AS [chacker], 
+    [view_fileInfo].[checker] AS [checker], 
     [view_fileInfo].[genPDF] AS [genPDF], 
     [view_fileInfo].[created_at] AS [created_at], 
     [view_fileInfo].[fileName] AS [fileName], 
@@ -214,7 +214,7 @@ warning 6002: The table/view 'DigitalImage.dbo.view_fileInfo' does not have a pr
           <Property Name="docType_id" Type="Int32" />
           <Property Name="status" Type="Int32" />
           <Property Name="maker" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="chacker" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="checker" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="genPDF" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="created_at" Type="DateTime" Precision="3" />
           <NavigationProperty Name="docType" Relationship="Self.FK_file_info_doc_info" FromRole="fileInfo" ToRole="docType" />
@@ -280,7 +280,7 @@ warning 6002: The table/view 'DigitalImage.dbo.view_fileInfo' does not have a pr
           <Property Name="uenValue" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="status" Type="Int32" />
           <Property Name="maker" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="chacker" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="checker" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="genPDF" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="created_at" Type="DateTime" Precision="3" />
           <Property Name="fileName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -389,7 +389,7 @@ warning 6002: The table/view 'DigitalImage.dbo.view_fileInfo' does not have a pr
                 <ScalarProperty Name="docType_id" ColumnName="docType_id" />
                 <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="maker" ColumnName="maker" />
-                <ScalarProperty Name="chacker" ColumnName="chacker" />
+                <ScalarProperty Name="checker" ColumnName="checker" />
                 <ScalarProperty Name="genPDF" ColumnName="genPDF" />
                 <ScalarProperty Name="created_at" ColumnName="created_at" />
               </MappingFragment>
@@ -454,7 +454,7 @@ warning 6002: The table/view 'DigitalImage.dbo.view_fileInfo' does not have a pr
                 <ScalarProperty Name="uenValue" ColumnName="uenValue" />
                 <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="maker" ColumnName="maker" />
-                <ScalarProperty Name="chacker" ColumnName="chacker" />
+                <ScalarProperty Name="checker" ColumnName="checker" />
                 <ScalarProperty Name="genPDF" ColumnName="genPDF" />
                 <ScalarProperty Name="created_at" ColumnName="created_at" />
                 <ScalarProperty Name="fileName" ColumnName="fileName" />

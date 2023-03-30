@@ -61,9 +61,9 @@
             this.tsDenq = new System.Windows.Forms.ToolStripButton();
             this.tsAbout = new System.Windows.Forms.ToolStripButton();
             this.ListVeiwPnl = new System.Windows.Forms.Panel();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.listMenu = new System.Windows.Forms.ToolStrip();
             this.scanItemGrid = new System.Windows.Forms.DataGridView();
+            this.listMenu = new System.Windows.Forms.ToolStrip();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tStrip.SuspendLayout();
@@ -418,6 +418,7 @@
             this.tsDenq.Size = new System.Drawing.Size(156, 95);
             this.tsDenq.Text = "Data Enquiry";
             this.tsDenq.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.tsDenq.Click += new System.EventHandler(this.tsDenq_Click);
             // 
             // tsAbout
             // 
@@ -441,11 +442,16 @@
             this.ListVeiwPnl.Size = new System.Drawing.Size(1203, 596);
             this.ListVeiwPnl.TabIndex = 3;
             // 
-            // imageList1
+            // scanItemGrid
             // 
-            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.scanItemGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.scanItemGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scanItemGrid.Location = new System.Drawing.Point(0, 25);
+            this.scanItemGrid.Name = "scanItemGrid";
+            this.scanItemGrid.RowHeadersWidth = 62;
+            this.scanItemGrid.RowTemplate.Height = 28;
+            this.scanItemGrid.Size = new System.Drawing.Size(1203, 571);
+            this.scanItemGrid.TabIndex = 1;
             // 
             // listMenu
             // 
@@ -457,16 +463,11 @@
             this.listMenu.TabIndex = 0;
             this.listMenu.Text = "toolStrip1";
             // 
-            // scanItemGrid
+            // imageList1
             // 
-            this.scanItemGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.scanItemGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.scanItemGrid.Location = new System.Drawing.Point(0, 25);
-            this.scanItemGrid.Name = "scanItemGrid";
-            this.scanItemGrid.RowHeadersWidth = 62;
-            this.scanItemGrid.RowTemplate.Height = 28;
-            this.scanItemGrid.Size = new System.Drawing.Size(1203, 571);
-            this.scanItemGrid.TabIndex = 1;
+            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // MainForm
             // 

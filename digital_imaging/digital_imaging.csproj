@@ -66,6 +66,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClassLibrary\ListViewColumnSorter.cs" />
+    <Compile Include="DataEnquiry.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DataEnquiry.Designer.cs">
+      <DependentUpon>DataEnquiry.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataEntry.cs">
       <SubType>Form</SubType>
     </Compile>
