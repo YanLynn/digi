@@ -23,7 +23,7 @@
     <Property Name="docType_id" Type="Int32" />
     <Property Name="status" Type="Int32" />
     <Property Name="maker" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="chacker" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="checker" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="genPDF" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="created_at" Type="DateTime" Precision="3" />
     <NavigationProperty Name="docType" Relationship="Self.FK_file_info_doc_info" FromRole="fileInfo" ToRole="docType" />
@@ -89,7 +89,7 @@
     <Property Name="uenValue" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="status" Type="Int32" />
     <Property Name="maker" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="chacker" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="checker" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="genPDF" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="created_at" Type="DateTime" Precision="3" />
     <Property Name="fileName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />

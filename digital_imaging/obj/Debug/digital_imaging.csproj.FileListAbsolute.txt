@@ -182,3 +182,4 @@ D:\c# winApp\digi\digital_imaging\obj\Debug\uk\digital_imaging.resources.dll
 D:\c# winApp\digi\digital_imaging\obj\Debug\digital_imaging.csproj.CopyComplete
 D:\c# winApp\digi\digital_imaging\obj\Debug\digital_imaging.exe
 D:\c# winApp\digi\digital_imaging\obj\Debug\digital_imaging.pdb
+D:\c# winApp\digi\digital_imaging\obj\Debug\digital_imaging.DataEnquiry.resources

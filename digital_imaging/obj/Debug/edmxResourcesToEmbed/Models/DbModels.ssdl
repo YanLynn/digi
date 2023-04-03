@@ -22,7 +22,7 @@
     <Property Name="docType_id" Type="int" />
     <Property Name="status" Type="int" />
     <Property Name="maker" Type="nvarchar" MaxLength="50" />
-    <Property Name="chacker" Type="nvarchar" MaxLength="50" />
+    <Property Name="checker" Type="nvarchar" MaxLength="50" />
     <Property Name="genPDF" Type="nvarchar" MaxLength="50" />
     <Property Name="created_at" Type="datetime" />
   </EntityType>
@@ -83,7 +83,7 @@ warning 6002: The table/view 'DigitalImage.dbo.view_fileInfo' does not have a pr
     <Property Name="uenValue" Type="nvarchar" MaxLength="50" />
     <Property Name="status" Type="int" />
     <Property Name="maker" Type="nvarchar" MaxLength="50" />
-    <Property Name="chacker" Type="nvarchar" MaxLength="50" />
+    <Property Name="checker" Type="nvarchar" MaxLength="50" />
     <Property Name="genPDF" Type="nvarchar" MaxLength="50" />
     <Property Name="created_at" Type="datetime" />
     <Property Name="fileName" Type="nvarchar" MaxLength="50" />
@@ -156,7 +156,7 @@ warning 6002: The table/view 'DigitalImage.dbo.view_fileInfo' does not have a pr
     [view_fileInfo].[uenValue] AS [uenValue], 
     [view_fileInfo].[status] AS [status], 
     [view_fileInfo].[maker] AS [maker], 
-    [view_fileInfo].[chacker] AS [chacker], 
+    [view_fileInfo].[checker] AS [checker], 
     [view_fileInfo].[genPDF] AS [genPDF], 
     [view_fileInfo].[created_at] AS [created_at], 
     [view_fileInfo].[fileName] AS [fileName], 

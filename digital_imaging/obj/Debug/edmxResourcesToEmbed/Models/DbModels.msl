@@ -23,7 +23,7 @@
           <ScalarProperty Name="docType_id" ColumnName="docType_id" />
           <ScalarProperty Name="status" ColumnName="status" />
           <ScalarProperty Name="maker" ColumnName="maker" />
-          <ScalarProperty Name="chacker" ColumnName="chacker" />
+          <ScalarProperty Name="checker" ColumnName="checker" />
           <ScalarProperty Name="genPDF" ColumnName="genPDF" />
           <ScalarProperty Name="created_at" ColumnName="created_at" />
         </MappingFragment>
@@ -88,7 +88,7 @@
           <ScalarProperty Name="uenValue" ColumnName="uenValue" />
           <ScalarProperty Name="status" ColumnName="status" />
           <ScalarProperty Name="maker" ColumnName="maker" />
-          <ScalarProperty Name="chacker" ColumnName="chacker" />
+          <ScalarProperty Name="checker" ColumnName="checker" />
           <ScalarProperty Name="genPDF" ColumnName="genPDF" />
           <ScalarProperty Name="created_at" ColumnName="created_at" />
           <ScalarProperty Name="fileName" ColumnName="fileName" />

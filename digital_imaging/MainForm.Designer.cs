@@ -103,7 +103,7 @@
             this.toolStripSeparator2,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(60, 34);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(60, 36);
             this.fileToolStripMenuItem.Text = "&File";
             // 
             // newToolStripMenuItem
@@ -189,7 +189,7 @@
             this.toolStripSeparator4,
             this.selectAllToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(64, 34);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(64, 36);
             this.editToolStripMenuItem.Text = "&Edit";
             // 
             // undoToolStripMenuItem
@@ -255,7 +255,7 @@
             this.customizeToolStripMenuItem,
             this.optionsToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(76, 34);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(76, 36);
             this.toolsToolStripMenuItem.Text = "&Tools";
             // 
             // customizeToolStripMenuItem
@@ -279,7 +279,7 @@
             this.toolStripSeparator5,
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(72, 34);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(72, 36);
             this.helpToolStripMenuItem.Text = "&Help";
             // 
             // contentsToolStripMenuItem
@@ -314,7 +314,7 @@
             // scannerItem
             // 
             this.scannerItem.Name = "scannerItem";
-            this.scannerItem.Size = new System.Drawing.Size(186, 34);
+            this.scannerItem.Size = new System.Drawing.Size(186, 36);
             this.scannerItem.Text = "Connect Scanner";
             this.scannerItem.Click += new System.EventHandler(this.scannerItem_Click);
             // 
