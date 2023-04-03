@@ -54,9 +54,7 @@
             this.tStrip = new System.Windows.Forms.ToolStrip();
             this.tsScan = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsSavePDF = new System.Windows.Forms.ToolStripButton();
-            this.tsSaveImage = new System.Windows.Forms.ToolStripButton();
-            this.tsDelete = new System.Windows.Forms.ToolStripButton();
+            this.tsReload = new System.Windows.Forms.ToolStripButton();
             this.dEntry = new System.Windows.Forms.ToolStripButton();
             this.tsDenq = new System.Windows.Forms.ToolStripButton();
             this.tsAbout = new System.Windows.Forms.ToolStripButton();
@@ -103,7 +101,7 @@
             this.toolStripSeparator2,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(60, 36);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(60, 34);
             this.fileToolStripMenuItem.Text = "&File";
             // 
             // newToolStripMenuItem
@@ -189,7 +187,7 @@
             this.toolStripSeparator4,
             this.selectAllToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(64, 36);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(64, 34);
             this.editToolStripMenuItem.Text = "&Edit";
             // 
             // undoToolStripMenuItem
@@ -255,7 +253,7 @@
             this.customizeToolStripMenuItem,
             this.optionsToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(76, 36);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(76, 34);
             this.toolsToolStripMenuItem.Text = "&Tools";
             // 
             // customizeToolStripMenuItem
@@ -279,7 +277,7 @@
             this.toolStripSeparator5,
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(72, 36);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(72, 34);
             this.helpToolStripMenuItem.Text = "&Help";
             // 
             // contentsToolStripMenuItem
@@ -314,7 +312,7 @@
             // scannerItem
             // 
             this.scannerItem.Name = "scannerItem";
-            this.scannerItem.Size = new System.Drawing.Size(186, 36);
+            this.scannerItem.Size = new System.Drawing.Size(186, 34);
             this.scannerItem.Text = "Connect Scanner";
             this.scannerItem.Click += new System.EventHandler(this.scannerItem_Click);
             // 
@@ -332,16 +330,15 @@
             // 
             this.tStrip.BackColor = System.Drawing.Color.LightSkyBlue;
             this.tStrip.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.tStrip.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.tStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsScan,
             this.toolStripSeparator6,
-            this.tsSavePDF,
-            this.tsSaveImage,
-            this.tsDelete,
             this.dEntry,
             this.tsDenq,
-            this.tsAbout});
+            this.tsAbout,
+            this.tsReload});
             this.tStrip.Location = new System.Drawing.Point(0, 0);
             this.tStrip.Name = "tStrip";
             this.tStrip.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
@@ -367,36 +364,16 @@
             this.toolStripSeparator6.Name = "toolStripSeparator6";
             this.toolStripSeparator6.Size = new System.Drawing.Size(6, 100);
             // 
-            // tsSavePDF
+            // tsReload
             // 
-            this.tsSavePDF.Image = global::digital_imaging.Properties.Resources.file_extension_pdf;
-            this.tsSavePDF.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsSavePDF.Name = "tsSavePDF";
-            this.tsSavePDF.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
-            this.tsSavePDF.Size = new System.Drawing.Size(123, 95);
-            this.tsSavePDF.Text = "Save PDF";
-            this.tsSavePDF.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.tsSavePDF.Click += new System.EventHandler(this.tsSavePDF_Click);
-            // 
-            // tsSaveImage
-            // 
-            this.tsSaveImage.Image = global::digital_imaging.Properties.Resources.picture;
-            this.tsSaveImage.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsSaveImage.Name = "tsSaveImage";
-            this.tsSaveImage.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
-            this.tsSaveImage.Size = new System.Drawing.Size(153, 95);
-            this.tsSaveImage.Text = "Save Images";
-            this.tsSaveImage.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // tsDelete
-            // 
-            this.tsDelete.Image = global::digital_imaging.Properties.Resources.cross;
-            this.tsDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsDelete.Name = "tsDelete";
-            this.tsDelete.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
-            this.tsDelete.Size = new System.Drawing.Size(97, 95);
-            this.tsDelete.Text = "Delete";
-            this.tsDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.tsReload.Image = global::digital_imaging.Properties.Resources.arrow_rotate_anticlockwise;
+            this.tsReload.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsReload.Name = "tsReload";
+            this.tsReload.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.tsReload.Size = new System.Drawing.Size(100, 95);
+            this.tsReload.Text = "Reload";
+            this.tsReload.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.tsReload.Click += new System.EventHandler(this.tsReload_Click);
             // 
             // dEntry
             // 
@@ -534,9 +511,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ToolStrip tStrip;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
-        private System.Windows.Forms.ToolStripButton tsSavePDF;
-        private System.Windows.Forms.ToolStripButton tsSaveImage;
-        private System.Windows.Forms.ToolStripButton tsDelete;
+        private System.Windows.Forms.ToolStripButton tsReload;
         private System.Windows.Forms.ToolStripButton dEntry;
         private System.Windows.Forms.Panel ListVeiwPnl;
         private System.Windows.Forms.ImageList imageList1;

@@ -45,21 +45,21 @@
             this.complete = new System.Windows.Forms.CheckBox();
             this.scan = new System.Windows.Forms.CheckBox();
             this.EnqSubmit = new System.Windows.Forms.Button();
-            this.enqGrid = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.proDate = new System.Windows.Forms.DateTimePicker();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.uenvle = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.runNum = new System.Windows.Forms.TextBox();
+            this.enqGrid = new System.Windows.Forms.DataGridView();
             this.enqTbl.SuspendLayout();
             this.enqFormTbl.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.enqGrid)).BeginInit();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.enqGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // enqTbl
@@ -302,17 +302,6 @@
             this.EnqSubmit.UseVisualStyleBackColor = false;
             this.EnqSubmit.Click += new System.EventHandler(this.EnqSubmit_Click);
             // 
-            // enqGrid
-            // 
-            this.enqGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.enqGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.enqGrid.Location = new System.Drawing.Point(33, 280);
-            this.enqGrid.Name = "enqGrid";
-            this.enqGrid.RowHeadersWidth = 62;
-            this.enqGrid.RowTemplate.Height = 28;
-            this.enqGrid.Size = new System.Drawing.Size(1312, 333);
-            this.enqGrid.TabIndex = 2;
-            // 
             // tableLayoutPanel3
             // 
             this.tableLayoutPanel3.ColumnCount = 1;
@@ -381,6 +370,17 @@
             this.runNum.Size = new System.Drawing.Size(440, 26);
             this.runNum.TabIndex = 6;
             // 
+            // enqGrid
+            // 
+            this.enqGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.enqGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.enqGrid.Location = new System.Drawing.Point(33, 280);
+            this.enqGrid.Name = "enqGrid";
+            this.enqGrid.RowHeadersWidth = 62;
+            this.enqGrid.RowTemplate.Height = 28;
+            this.enqGrid.Size = new System.Drawing.Size(1312, 333);
+            this.enqGrid.TabIndex = 2;
+            // 
             // DataEnquiry
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -396,12 +396,12 @@
             this.tableLayoutPanel2.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.enqGrid)).EndInit();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.enqGrid)).EndInit();
             this.ResumeLayout(false);
 
         }

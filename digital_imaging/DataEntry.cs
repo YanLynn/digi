@@ -1,203 +1,433 @@
-﻿
-using digital_imaging.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using ListView = System.Windows.Forms.ListView;
+
+using digital_imaging.Models;
+using Manina.Windows.Forms;
+using System.Diagnostics;
+using PdfSharp.Pdf;
+using PdfSharp.Drawing;
+using digital_imaging.Properties;
 
 namespace digital_imaging
 {
+
     public partial class DataEntry : Form
     {
-        DigitalImageEntities db = new DigitalImageEntities();
-        ColumnHeader columnheader;
-        private ListViewColumnSorter lvwColumnSorter;
+        DigitalImageEntities _entity = new DigitalImageEntities();
         string fPath = System.Configuration.ConfigurationSettings.AppSettings["fPath"];
+        string userName = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+
+        
+
+        //ImageList _imageList = new ImageList();
+        fileInfo _currentFileInfo = null;
+        List<uenType> uenTypes = null;
 
         public DataEntry()
         {
             InitializeComponent();
+
+            Application.Idle += new EventHandler(Application_Idle);
+
            
-
-
-            dEnList.View = View.Details;
-
-            columnheader = new ColumnHeader();
-            columnheader.Text = "Name";
-            dEnList.Columns.Add(columnheader);
-
-            columnheader = new ColumnHeader();
-            columnheader.Text = "Path";
-            dEnList.Columns.Add(columnheader);
-
-            columnheader = new ColumnHeader();
-            columnheader.Text = "Date Modified";
-            dEnList.Columns.Add(columnheader);
-
-            columnheader = new ColumnHeader();
-            columnheader.Text = "Size";
-            dEnList.Columns.Add(columnheader);
-
-            columnheader = new ColumnHeader();
-            columnheader.Text = "Type";
-            dEnList.Columns.Add(columnheader);
-
-            dEnList.FullRowSelect = true;
-            dEnList.GridLines = true;
-
-            dEnList.AllowColumnReorder = true;
-            dEnList.Sorting = SortOrder.Ascending;
-            foreach (ColumnHeader ch in this.dEnList.Columns)
+            if (Settings.Default.ImageMode == 0)
             {
-                ch.Width = 150;
-
-            }
-
-        }
-
-        private void DataEntry_Load(object sender, EventArgs e)
-        {
-            getFileInfo();
-
-
-        }
-
-
-
-        public void getFileInfo()
-        {
-            
-            try
-            {
-                lvwColumnSorter = new ListViewColumnSorter();
-                dEnList.ListViewItemSorter = lvwColumnSorter;
-
-                this.dEnList.Items.Clear();
-                List<Array> fileName = new List<Array>();
-                fileName.Add(db.fileInfoes.Where(x => x.status == 0 & (x.maker == null || x.maker == "")).Select(x => x.fileUniqueID).ToArray());
-                DirectoryInfo directoryInfo = new DirectoryInfo(fPath);
-                if (fileName != null)
-                {
-                    if (directoryInfo.Exists)
-                    {
-                        foreach (DirectoryInfo subdir in directoryInfo.GetDirectories())
-                        {
-                            foreach (string file in fileName[0])
-                            {
-                                if (subdir.Name == file)
-                                {
-                                    DirectoryInfo getFolder = new DirectoryInfo(fPath + file);
-                                    if (getFolder.Exists)
-                                    {
-
-                                        foreach (FileInfo imgs in getFolder.GetFiles())
-                                        {
-                                            if (imgs.Extension == ".png" || imgs.Extension == ".jpeg" || imgs.Extension == ".tiff" || imgs.Extension == ".jpg")
-                                            {
-                                                string[] sizes = { "B", "KB", "MB", "GB", "TB" };
-                                                double len = imgs.Length;
-                                                int order = 0;
-                                                while (len >= 1024 && order < sizes.Length - 1)
-                                                {
-                                                    order++;
-                                                    len = len / 1024;
-                                                }
-
-                                                string result = String.Format("{0:0.##} {1}", len, sizes[order]);
-                                                ListViewItem listViewItem1 = new ListViewItem(new string[] { imgs.Name, imgs.FullName, imgs.LastWriteTime.ToString(), result, imgs.Extension }, -1, Color.Empty, Color.Empty, new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, ((System.Byte)(0))));
-
-                                                dEnList.Items.AddRange(new ListViewItem[] { listViewItem1 });
-                                                dEnList.Tag = fPath + file;
-
-                                            }
-                                        }
-                                    }
-                                    else
-                                    {
-                                        MessageBox.Show("file not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                    }
-                                    break;
-                                }
-                                else if (subdir.Name != file)
-                                {
-                                    continue;
-                                }
-                            }
-                            if (dEnList.Items.Count > 0)
-                            {
-                                break;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Directory not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Not found entry file!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
-            }
-        }
-
-        //show image
-        private void dEnList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-            if (this != null && dEnList.SelectedItems.Count > 0)
-            {
-                ListViewItem lvi = dEnList.SelectedItems[0];
-                string imagekeyname = dEnList.Tag + "\\" + lvi.Text;
-
-                if (this.pictureBox1.Image != null)
-                {
-                    this.pictureBox1.Image.Dispose();
-                    this.pictureBox1.InitialImage = null;
-                    this.pictureBox1.Image = null;
-                }
-
-                this.pictureBox1.Load(imagekeyname);
-
-            }
-
-        }
-
-
-
-        //srot order by column
-        private void dEnList_ColumnClick(object sender, ColumnClickEventArgs e)
-        {
-
-            if (e.Column == lvwColumnSorter.SortColumn)
-            {
-                if (lvwColumnSorter.Order == SortOrder.Ascending)
-                {
-                    lvwColumnSorter.Order = SortOrder.Descending;
-                }
-                else
-                {
-                    lvwColumnSorter.Order = SortOrder.Ascending;
-                }
+                imageListView1.View = Manina.Windows.Forms.View.Gallery;
             }
             else
             {
-                lvwColumnSorter.SortColumn = e.Column;
-                lvwColumnSorter.Order = SortOrder.Ascending;
+                imageListView1.PaneWidth = 500;
+                imageListView1.View = Manina.Windows.Forms.View.Pane;
+            }
+            imageListView1.DragDrop += imageListView1_DragDrop;
+
+            setUpUENType();
+
+            
+        }
+
+
+        private void setUpUENType()
+        {
+            try
+            {
+                uenTypes = _entity.uenTypes.ToList();
+                foreach (uenType uenType in uenTypes)
+                {
+                    uenTypeComboBox.Items.Add(uenType.uenName);
+                }
+            }catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+
+        private void imageListView1_DragDrop(object sender, DragEventArgs e)
+        {
+            updateImageList();
+        }
+
+        private void updateImageList()
+        {
+            try
+            {
+                string _imageNames = "";
+                foreach (ImageListViewItem item in imageListView1.Items)
+                {
+                    _imageNames += item.Text + ",";
+                }
+                _currentFileInfo = _entity.fileInfoes.Where(x => x.id == _currentFileInfo.id).FirstOrDefault();
+                _currentFileInfo.imageList = _imageNames;
+                _entity.SaveChanges();
+            }catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
 
-            this.dEnList.Sort();
+        }
+
+        void Application_Idle(object sender, EventArgs e)
+        {
+            try
+            {
+                rotateLeftButton.Enabled = imageListView1.SelectedItems.Count > 0;
+                rotateRightButton.Enabled = imageListView1.SelectedItems.Count > 0;
+                deleteImageButton.Enabled = imageListView1.SelectedItems.Count > 0;
+                switchViewButton.Enabled = imageListView1.SelectedItems.Count > 0;
+
+                panel1.Enabled = _currentFileInfo != null;
+            }catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
+            private void getItem()
+        {
+            try
+            {
+                _currentFileInfo = _entity.fileInfoes.Where(x => x.status == 0).FirstOrDefault();
+                if (_currentFileInfo != null)
+                {
+                    this.Text = String.Format("Data Entry - {0}", _currentFileInfo.fileUniqueID);
+                    runNumTextBox.Text = _currentFileInfo.rumNum;
+                    List<string> images = _currentFileInfo.imageList.Split(',').ToList();
+
+                    foreach (string img in images)
+                    {
+                        if (System.IO.File.Exists(fPath + _currentFileInfo.fileUniqueID + "\\" + img))
+                        {
+                            // _imageList.Images.Add(img, Image.FromFile(fPath + _currentFileInfo.fileUniqueID + "\\" + img));
+
+                            imageListView1.Items.Add(fPath + _currentFileInfo.fileUniqueID + "\\" + img);
+                        }
+                    }
+
+                }
+                else
+                {
+                    resetForm();
+                    MessageBox.Show("No more file info for Data Entry.");
+                }
+            }catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
+        private void getItem(object sender, EventArgs e)
+        {
+            getItem();
+        }
+
+        private void deleteImage(object sender, EventArgs e)
+        {
+
+            try
+            {
+                if (MessageBox.Show("Remove images from list. Are you sure you want to continue?",
+                "Digital Imaging", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+                {
+                    imageListView1.SuspendLayout();
+
+                    foreach (var item in imageListView1.SelectedItems)
+                        imageListView1.Items.Remove(item);
+
+                    imageListView1.ResumeLayout(true);
+
+                    updateImageList();
+                }
+            }catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void rotateRight(object sender, EventArgs e)
+        {
+            try
+            {
+                foreach (ImageListViewItem item in imageListView1.SelectedItems)
+                {
+                    item.BeginEdit();
+                    using (Image img = Image.FromFile(item.FileName))
+                    {
+                        img.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                        img.Save(item.FileName);
+                    }
+                    item.Update();
+                    item.EndEdit();
+                }
+            }catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void rotateLeft(object sender, EventArgs e)
+        {
+            try
+            {
+                foreach (ImageListViewItem item in imageListView1.SelectedItems)
+                {
+                    item.BeginEdit();
+                    using (Image img = Image.FromFile(item.FileName))
+                    {
+                        img.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                        img.Save(item.FileName);
+                    }
+                    item.Update();
+                    item.EndEdit();
+                }
+            }catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        
+
+        private void submit(object sender, EventArgs e)
+        {
+
+            try
+            {
+                foreach (Control control in this.Controls)
+                {
+                    // Set focus on control
+                    control.Focus();
+                    // Validate causes the control's Validating event to be fired,
+                    // if CausesValidation is True
+                    if (!Validate())
+                    {
+                        DialogResult = DialogResult.None;
+                        MessageBox.Show("Validation Failed", "Please check your input!");
+                        return;
+                    }
+                }
+                if (_currentFileInfo != null)
+                {
+                    SetLoading(true, "Generating PDF and saving...");
+                    generatePDF();
+                    updateFileInfo();
+                    resetForm();
+                    SetLoading(false, "");
+                    getItem();
+                }
+
+            }catch  (Exception ex) {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void generatePDF()
+        {
+
+            try
+            {
+                PdfDocument outPdf = new PdfDocument();
+
+                PdfDocument doc = new PdfDocument();
+                var tmpint = 0;
+
+                foreach (ImageListViewItem item in imageListView1.Items)
+                {
+                    doc.Pages.Add(new PdfPage());
+                    XGraphics xgr = XGraphics.FromPdfPage(doc.Pages[tmpint]);
+                    tmpint++;
+                    XImage img = XImage.FromFile(item.FileName);
+                    xgr.DrawImage(img, 0, 0);
+                }
+
+                String fileName = _currentFileInfo.fileUniqueID + ".PDF";
+
+                doc.Save(fPath + _currentFileInfo.fileUniqueID + "\\" + fileName);
+                doc.Close();
+            }
+            catch
+            (Exception ex){
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void SetLoading(bool displayLoader, String message)
+        {
+            try
+            {
+                if (displayLoader)
+                {
+                    this.Invoke((MethodInvoker)delegate
+                    {
+                        loadingLabel.Text = message;
+                        loadingLabel.Visible = true;
+                        this.Cursor = System.Windows.Forms.Cursors.WaitCursor;
+                    });
+                }
+                else
+                {
+                    this.Invoke((MethodInvoker)delegate
+                    {
+                        loadingLabel.Visible = false;
+                        this.Cursor = System.Windows.Forms.Cursors.Default;
+                    });
+                }
+            }catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+
+        private void updateFileInfo()
+        {
+
+            try
+            {
+                _currentFileInfo = _entity.fileInfoes.Where(x => x.id == _currentFileInfo.id).FirstOrDefault();
+                _currentFileInfo.uenType = uenTypes[uenTypeComboBox.SelectedIndex];
+                _currentFileInfo.maker = userName;
+                _currentFileInfo.status = 1;
+                _currentFileInfo.uenValue = uenTextBox.Text;
+                _entity.SaveChanges();
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void resetForm()
+        {
+            try
+            {
+                this.imageListView1.Items.Clear();
+                this.uenTypeComboBox.SelectedIndex = -1;
+                this.uenTextBox.Clear();
+                this.runNumTextBox.Clear();
+            }catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
+        private void updateRejectStatus()
+        {
+
+            try
+            {
+                _currentFileInfo = _entity.fileInfoes.Where(x => x.id == _currentFileInfo.id).FirstOrDefault();
+                _currentFileInfo.maker = userName;
+                _currentFileInfo.status = 3;
+                _entity.SaveChanges();
+            }catch (Exception ex){ MessageBox.Show(ex.Message); }
+        }
+
+        private void rejectFileInfo(object sender, EventArgs e)
+        {
+            try
+            {
+                if (MessageBox.Show("Reject File Info. Are you sure you want to continue?",
+                "Digital Imaging", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+                {
+                    updateRejectStatus();
+                    resetForm();
+                    getItem();
+                }
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void switchView(object sender, EventArgs e)
+        {
+            try
+            {
+                if (imageListView1.View == Manina.Windows.Forms.View.Gallery)
+                {
+                    imageListView1.PaneWidth = 500;
+                    imageListView1.View = Manina.Windows.Forms.View.Pane;
+                    Settings.Default.ImageMode = 1;
+                }
+                else
+                {
+                    imageListView1.View = Manina.Windows.Forms.View.Gallery;
+                    Settings.Default.ImageMode = 0;
+                }
+
+                Settings.Default.Save();
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void uenTextBoxValidating(object sender, CancelEventArgs e)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(uenTextBox.Text))
+                {
+                    e.Cancel = true;
+                    errorProvider1.SetError(uenTextBox, "UEN should not be left blank!");
+                }
+                else
+                {
+                    errorProvider1.SetError(uenTextBox, null);
+                }
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void uenTypeValidating(object sender, CancelEventArgs e)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(uenTypeComboBox.Text))
+                {
+                    e.Cancel = true;
+                    errorProvider1.SetError(uenTypeComboBox, "UEN Type should not be left blank!");
+                }
+                else
+                {
+                    errorProvider1.SetError(uenTypeComboBox, null);
+                }
+            }catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

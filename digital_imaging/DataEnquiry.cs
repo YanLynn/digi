@@ -38,8 +38,8 @@ namespace digital_imaging
                                         .Where(x => entry.Checked ? x.status == 1 : true)
                                         .Where(x => complete.Checked ? x.status == 2 : true)
                                         .Where(x => reject.Checked ? x.status == 3 : true)
-                                        .Where(x => maker.Checked ? x.maker.Contains("maker") : true)
-                                        .Where(x => checker.Checked ? x.checker.Contains("checker") : true)
+                                        .Where(x => maker.Checked ? x.maker != null : true)
+                                        .Where(x => checker.Checked ? x.checker != null : true)
                                         .ToList();
                 enqGrid.DataSource = dEnq;
 
@@ -67,7 +67,8 @@ namespace digital_imaging
                 {
                     for (int j = 0; j < enqGrid.Columns.Count; j++)
                     {
-                        worksheet.Cells[i + 2, j + 1] = enqGrid.Rows[i].Cells[j].Value.ToString();
+                     
+                        worksheet.Cells[i + 2, j + 1] = (enqGrid.Rows[i].Cells[j].Value == null) ? "" : enqGrid.Rows[i].Cells[j].Value.ToString();
                     }
                 }
                 DirectoryInfo directoryInfo = new DirectoryInfo(fPath);

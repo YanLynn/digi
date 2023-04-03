@@ -506,19 +506,15 @@ namespace digital_imaging
                 default:
                 case EBUTTONSTATE.CLOSED:
                     tsScan.Enabled = false;
-                    tsSavePDF.Enabled = false;
-                    tsSaveImage.Enabled = false;
-                    tsDelete.Enabled = false;
-                    dEntry.Enabled = true;
-                    tsDenq.Enabled = true;
+                    tsReload.Enabled = false;
+                    dEntry.Enabled = false;
+                    tsDenq.Enabled = false;
                     tsAbout.Enabled = false;
                     break;
 
                 case EBUTTONSTATE.OPEN:
                     tsScan.Enabled = true;
-                    tsSavePDF.Enabled = true;
-                    tsSaveImage.Enabled = true;
-                    tsDelete.Enabled = true;
+                    tsReload.Enabled = true;
                     dEntry.Enabled = true;
                     tsDenq.Enabled = true;
                     tsAbout.Enabled = true;
@@ -526,9 +522,7 @@ namespace digital_imaging
 
                 case EBUTTONSTATE.SCANNING:
                     tsScan.Enabled = false;
-                    tsSavePDF.Enabled = false;
-                    tsSaveImage.Enabled = false;
-                    tsDelete.Enabled = false;
+                    tsReload.Enabled = false;
                     dEntry.Enabled = false;
                     tsDenq.Enabled = false;
                     tsAbout.Enabled = true;
@@ -799,6 +793,7 @@ namespace digital_imaging
             dateTimePicer.ValueChanged += dateTimePicer_ValueChanged;
             listMenu.Items.Add(new ToolStripControlHost(dateTimePicer));
         }
+
 
         static ImageList _imageList;
         public static ImageList ImageList
@@ -1090,6 +1085,7 @@ namespace digital_imaging
 
         private void loadGrid()
         {
+            scanItemGrid.DataSource = null;
             string _format = "yyyy-mm-dd";
             _format = DateTime.Now.ToString();
             List<view_fileInfo> _fileInfoList = new List<view_fileInfo>();
@@ -1139,6 +1135,11 @@ namespace digital_imaging
             {
                 dEq.BringToFront();
             }
+        }
+
+        private void tsReload_Click(object sender, EventArgs e)
+        {
+            loadGrid();
         }
 
 

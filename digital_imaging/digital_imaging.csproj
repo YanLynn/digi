@@ -39,6 +39,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="ImageListView">
+      <HintPath>..\..\New folder\New folder\digi\ImageListView.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1001\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -145,12 +148,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ThumbnailList.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="ThumbnailList.designer.cs">
-      <DependentUpon>ThumbnailList.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="DataEnquiry.resx">
       <DependentUpon>DataEnquiry.cs</DependentUpon>
     </EmbeddedResource>
@@ -176,51 +173,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="ThumbnailList.bg.resx">
-      <DependentUpon>ThumbnailList.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ThumbnailList.ca.resx">
-      <DependentUpon>ThumbnailList.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ThumbnailList.cs.resx">
-      <DependentUpon>ThumbnailList.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ThumbnailList.da.resx">
-      <DependentUpon>ThumbnailList.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ThumbnailList.de.resx">
-      <DependentUpon>ThumbnailList.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ThumbnailList.es.resx">
-      <DependentUpon>ThumbnailList.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ThumbnailList.fr.resx">
-      <DependentUpon>ThumbnailList.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ThumbnailList.he.resx">
-      <DependentUpon>ThumbnailList.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ThumbnailList.it.resx">
-      <DependentUpon>ThumbnailList.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ThumbnailList.pl.resx">
-      <DependentUpon>ThumbnailList.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ThumbnailList.pt-BR.resx">
-      <DependentUpon>ThumbnailList.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ThumbnailList.pt-PT.resx">
-      <DependentUpon>ThumbnailList.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ThumbnailList.resx">
-      <DependentUpon>ThumbnailList.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ThumbnailList.ru.resx">
-      <DependentUpon>ThumbnailList.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ThumbnailList.uk.resx">
-      <DependentUpon>ThumbnailList.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>

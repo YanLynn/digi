@@ -10,5 +10,8 @@
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
       <Value Profile="(Default)">Data Source=LAPTOP-3HQ12V54\SQLEXPRESS01;Initial Catalog=DigitalImage;Integrated Security=True</Value>
     </Setting>
+    <Setting Name="ImageMode" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

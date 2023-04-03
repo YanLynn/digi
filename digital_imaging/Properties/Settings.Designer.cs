@@ -33,5 +33,17 @@ namespace digital_imaging.Properties {
                 return ((string)(this["DigitalImageConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int ImageMode {
+            get {
+                return ((int)(this["ImageMode"]));
+            }
+            set {
+                this["ImageMode"] = value;
+            }
+        }
     }
 }
