@@ -65,7 +65,7 @@
     <Property Name="fileInfoID" Type="Int32" />
     <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="machine_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="message" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="message" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="date" Type="DateTime" Precision="0" />
     <NavigationProperty Name="fileInfo" Relationship="Self.FK_user_auditTrail_fileInfo" FromRole="user_auditTrail" ToRole="fileInfo" />
   </EntityType>

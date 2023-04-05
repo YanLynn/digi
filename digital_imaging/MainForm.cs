@@ -506,10 +506,10 @@ namespace digital_imaging
                 default:
                 case EBUTTONSTATE.CLOSED:
                     tsScan.Enabled = false;
-                    tsReload.Enabled = false;
-                    dEntry.Enabled = false;
-                    tsDenq.Enabled = false;
-                    tsAbout.Enabled = false;
+                    tsReload.Enabled = true;
+                    dEntry.Enabled = true;
+                    tsDenq.Enabled = true;
+                    tsAbout.Enabled = true;
                     break;
 
                 case EBUTTONSTATE.OPEN:
@@ -1142,7 +1142,32 @@ namespace digital_imaging
             loadGrid();
         }
 
-
+        private void formatCell(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (this.scanItemGrid.Columns[e.ColumnIndex].Name == "status")
+            {
+                if (e.Value != null)
+                {
+                    if (e.Value.ToString() == "0")
+                    {
+                        e.Value = "Scanned";
+                    }
+                    else if (e.Value.ToString() == "1")
+                    {
+                        e.Value = "Data Entry";
+                    }
+                    else if (e.Value.ToString() == "2")
+                    {
+                        e.Value = "Completed";
+                    }
+                    else if (e.Value.ToString() == "3")
+                    {
+                        e.Value = "Rejected";
+                    }
+                    e.FormattingApplied = true;
+                }
+            }
+        }
 
 
         //SOE HTET

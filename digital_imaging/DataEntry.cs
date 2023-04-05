@@ -15,6 +15,7 @@ using PdfSharp.Pdf;
 using PdfSharp.Drawing;
 using digital_imaging.Properties;
 
+
 namespace digital_imaging
 {
 
@@ -22,7 +23,9 @@ namespace digital_imaging
     {
         DigitalImageEntities _entity = new DigitalImageEntities();
         string fPath = System.Configuration.ConfigurationSettings.AppSettings["fPath"];
-        string userName = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+        string userName = Environment.UserName;
+
+        int makerOrChecker = 0; // 0 for maker, 1 for checker;
 
         
 
@@ -103,7 +106,7 @@ namespace digital_imaging
                 deleteImageButton.Enabled = imageListView1.SelectedItems.Count > 0;
                 switchViewButton.Enabled = imageListView1.SelectedItems.Count > 0;
 
-                panel1.Enabled = _currentFileInfo != null;
+                tableLayoutPanel2.Enabled = _currentFileInfo != null;
             }catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
@@ -115,9 +118,46 @@ namespace digital_imaging
         {
             try
             {
-                _currentFileInfo = _entity.fileInfoes.Where(x => x.status == 0).FirstOrDefault();
+                _currentFileInfo = _entity.fileInfoes.Where(x => x.status == 0 || (x.status == 1 && x.maker != null && x.maker != userName)).FirstOrDefault();
+                
                 if (_currentFileInfo != null)
                 {
+
+                    if (_currentFileInfo.status == 1)
+                    {
+                        if (!isNullorEmpty(_currentFileInfo.maker))
+                        {
+                            if (_currentFileInfo.maker != userName)
+                            {
+                                // checker scenario
+                                makerOrChecker = 1;
+                                string message = string.Format("User - {0} - started DataEntry as - Checker",userName);
+                                logAuditTrailNoWait(message);
+                            }
+                            else
+                            {
+                                _currentFileInfo = _entity.fileInfoes.Where(x => x.status == 0
+                                                                    || (x.status == 1
+                                                                    && x.maker != userName)).FirstOrDefault();
+                            }
+                        }
+                        else
+                        {
+                            // maker scenario
+                            makerOrChecker = 0;
+                            string message = string.Format("User - {0} - started DataEntry as - Maker", userName);
+                            logAuditTrailNoWait(message);
+                        }
+                    }
+                    else
+                    {
+                        // maker scenario
+                        makerOrChecker = 0;
+                        string message = string.Format("User - {0} - started DataEntry as - Maker", userName);
+                        logAuditTrailNoWait(message);
+                    }
+
+
                     this.Text = String.Format("Data Entry - {0}", _currentFileInfo.fileUniqueID);
                     runNumTextBox.Text = _currentFileInfo.rumNum;
                     List<string> images = _currentFileInfo.imageList.Split(',').ToList();
@@ -131,6 +171,23 @@ namespace digital_imaging
                             imageListView1.Items.Add(fPath + _currentFileInfo.fileUniqueID + "\\" + img);
                         }
                     }
+                    if(makerOrChecker == 1)
+                    {
+                        int index = 0;
+                        foreach(uenType tmp in uenTypes)
+                        {
+                            if(tmp.id == _currentFileInfo.uenType.id)
+                            {
+                                break;
+                            }
+
+                            index++;
+                        }
+
+                        uenTypeComboBox.SelectedIndex = index;
+                        uenTextBox.Text = _currentFileInfo.uenValue;
+                    }
+                    
 
                 }
                 else
@@ -235,11 +292,20 @@ namespace digital_imaging
                         return;
                     }
                 }
+
                 if (_currentFileInfo != null)
                 {
                     SetLoading(true, "Generating PDF and saving...");
                     generatePDF();
                     updateFileInfo();
+
+                    string mkrckr = makerOrChecker == 0 ? "Maker" : "Checker";
+                    string message = string.Format("User - {0} - {1} - Submitted Vals - type:{2} - val:{3}",
+                                                    userName, mkrckr, uenTypeComboBox.Text, uenTextBox.Text);
+
+                    logAuditTrailNoWait(message);
+
+
                     resetForm();
                     SetLoading(false, "");
                     getItem();
@@ -289,6 +355,7 @@ namespace digital_imaging
                     this.Invoke((MethodInvoker)delegate
                     {
                         loadingLabel.Text = message;
+                        imageListView1.Visible = false;
                         loadingLabel.Visible = true;
                         this.Cursor = System.Windows.Forms.Cursors.WaitCursor;
                     });
@@ -297,6 +364,7 @@ namespace digital_imaging
                 {
                     this.Invoke((MethodInvoker)delegate
                     {
+                        imageListView1.Visible = true;
                         loadingLabel.Visible = false;
                         this.Cursor = System.Windows.Forms.Cursors.Default;
                     });
@@ -313,10 +381,21 @@ namespace digital_imaging
 
             try
             {
+                
+
                 _currentFileInfo = _entity.fileInfoes.Where(x => x.id == _currentFileInfo.id).FirstOrDefault();
                 _currentFileInfo.uenType = uenTypes[uenTypeComboBox.SelectedIndex];
-                _currentFileInfo.maker = userName;
-                _currentFileInfo.status = 1;
+                if(makerOrChecker == 0)
+                {
+                    _currentFileInfo.maker = userName;
+                    _currentFileInfo.status = 1;
+                }
+                else
+                {
+                    _currentFileInfo.checker = userName;
+                    _currentFileInfo.status = 2;
+                }
+                
                 _currentFileInfo.uenValue = uenTextBox.Text;
                 _entity.SaveChanges();
             }catch(Exception ex)
@@ -360,6 +439,12 @@ namespace digital_imaging
                 "Digital Imaging", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
                 {
                     updateRejectStatus();
+
+                    string mkrckr = makerOrChecker == 0 ? "Maker" : "Checker";
+                    string message = string.Format("User - {0} - {1} - Rejected fileInfo:{2}",
+                                                    userName, mkrckr, _currentFileInfo.fileUniqueID);
+                    logAuditTrailNoWait(message);
+
                     resetForm();
                     getItem();
                 }
@@ -411,6 +496,13 @@ namespace digital_imaging
             }
         }
 
+        private bool isNullorEmpty(string str)
+        {
+            if (str == null || str.Length == 0) return true;
+
+            return false;
+        }
+
         private void uenTypeValidating(object sender, CancelEventArgs e)
         {
             try
@@ -427,6 +519,28 @@ namespace digital_imaging
             }catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        
+
+        private void logAuditTrailNoWait(string message)
+        {
+            try
+            {
+                user_auditTrail user_AuditTrail = new user_auditTrail();
+                user_AuditTrail.fileInfoID = _currentFileInfo.id;
+                user_AuditTrail.message = message;
+                user_AuditTrail.machine_name = System.Windows.Forms.SystemInformation.ComputerName;
+                user_AuditTrail.username = userName;
+                user_AuditTrail.date = DateTime.Now;
+                _entity.user_auditTrail.Add(user_AuditTrail);
+                _entity.SaveChanges();
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
             }
         }
     }

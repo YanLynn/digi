@@ -54,10 +54,10 @@
             this.tStrip = new System.Windows.Forms.ToolStrip();
             this.tsScan = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsReload = new System.Windows.Forms.ToolStripButton();
             this.dEntry = new System.Windows.Forms.ToolStripButton();
             this.tsDenq = new System.Windows.Forms.ToolStripButton();
             this.tsAbout = new System.Windows.Forms.ToolStripButton();
+            this.tsReload = new System.Windows.Forms.ToolStripButton();
             this.ListVeiwPnl = new System.Windows.Forms.Panel();
             this.scanItemGrid = new System.Windows.Forms.DataGridView();
             this.listMenu = new System.Windows.Forms.ToolStrip();
@@ -364,17 +364,6 @@
             this.toolStripSeparator6.Name = "toolStripSeparator6";
             this.toolStripSeparator6.Size = new System.Drawing.Size(6, 100);
             // 
-            // tsReload
-            // 
-            this.tsReload.Image = global::digital_imaging.Properties.Resources.arrow_rotate_anticlockwise;
-            this.tsReload.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsReload.Name = "tsReload";
-            this.tsReload.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
-            this.tsReload.Size = new System.Drawing.Size(100, 95);
-            this.tsReload.Text = "Reload";
-            this.tsReload.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.tsReload.Click += new System.EventHandler(this.tsReload_Click);
-            // 
             // dEntry
             // 
             this.dEntry.Image = global::digital_imaging.Properties.Resources.add;
@@ -407,6 +396,17 @@
             this.tsAbout.Text = "About";
             this.tsAbout.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
+            // tsReload
+            // 
+            this.tsReload.Image = global::digital_imaging.Properties.Resources.arrow_rotate_anticlockwise;
+            this.tsReload.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsReload.Name = "tsReload";
+            this.tsReload.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.tsReload.Size = new System.Drawing.Size(100, 95);
+            this.tsReload.Text = "Reload";
+            this.tsReload.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.tsReload.Click += new System.EventHandler(this.tsReload_Click);
+            // 
             // ListVeiwPnl
             // 
             this.ListVeiwPnl.AutoScroll = true;
@@ -429,6 +429,7 @@
             this.scanItemGrid.RowTemplate.Height = 28;
             this.scanItemGrid.Size = new System.Drawing.Size(1203, 571);
             this.scanItemGrid.TabIndex = 1;
+            this.scanItemGrid.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.formatCell);
             // 
             // listMenu
             // 
