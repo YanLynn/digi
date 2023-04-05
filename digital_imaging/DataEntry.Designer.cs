@@ -30,17 +30,17 @@
         {
             this.components = new System.ComponentModel.Container();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.loadingLabel = new System.Windows.Forms.Label();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.imageListView1 = new Manina.Windows.Forms.ImageListView();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.rotateLeftButton = new System.Windows.Forms.ToolStripButton();
             this.rotateRightButton = new System.Windows.Forms.ToolStripButton();
             this.deleteImageButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.switchViewButton = new System.Windows.Forms.ToolStripButton();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.loadingLabel = new System.Windows.Forms.Label();
+            this.imageListView1 = new Manina.Windows.Forms.ImageListView();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label3 = new System.Windows.Forms.Label();
@@ -72,58 +72,9 @@
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.toolStrip1.Size = new System.Drawing.Size(1200, 38);
+            this.toolStrip1.Size = new System.Drawing.Size(1200, 33);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 38);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 38);
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.loadingLabel);
-            this.panel2.Controls.Add(this.imageListView1);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(4, 5);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1192, 393);
-            this.panel2.TabIndex = 3;
-            // 
-            // loadingLabel
-            // 
-            this.loadingLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.loadingLabel.Location = new System.Drawing.Point(0, 0);
-            this.loadingLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.loadingLabel.Name = "loadingLabel";
-            this.loadingLabel.Size = new System.Drawing.Size(1192, 393);
-            this.loadingLabel.TabIndex = 2;
-            this.loadingLabel.Text = "Loading...";
-            this.loadingLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.loadingLabel.Visible = false;
-            // 
-            // errorProvider1
-            // 
-            this.errorProvider1.ContainerControl = this;
-            // 
-            // imageListView1
-            // 
-            this.imageListView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.imageListView1.Location = new System.Drawing.Point(0, 0);
-            this.imageListView1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.imageListView1.Name = "imageListView1";
-            this.imageListView1.PersistentCacheDirectory = "";
-            this.imageListView1.PersistentCacheSize = ((long)(100));
-            this.imageListView1.Size = new System.Drawing.Size(1192, 393);
-            this.imageListView1.TabIndex = 1;
-            this.imageListView1.UseWIC = true;
             // 
             // toolStripButton1
             // 
@@ -131,9 +82,14 @@
             this.toolStripButton1.Image = global::digital_imaging.Properties.Resources.arrow_down;
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(34, 33);
+            this.toolStripButton1.Size = new System.Drawing.Size(34, 28);
             this.toolStripButton1.Text = "toolStripButton1";
             this.toolStripButton1.Click += new System.EventHandler(this.getItem);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 33);
             // 
             // rotateLeftButton
             // 
@@ -141,7 +97,7 @@
             this.rotateLeftButton.Image = global::digital_imaging.Properties.Resources.arrow_rotate_anticlockwise;
             this.rotateLeftButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.rotateLeftButton.Name = "rotateLeftButton";
-            this.rotateLeftButton.Size = new System.Drawing.Size(34, 33);
+            this.rotateLeftButton.Size = new System.Drawing.Size(34, 28);
             this.rotateLeftButton.Text = "toolStripButton2";
             this.rotateLeftButton.Click += new System.EventHandler(this.rotateLeft);
             // 
@@ -151,7 +107,7 @@
             this.rotateRightButton.Image = global::digital_imaging.Properties.Resources.arrow_rotate_clockwise;
             this.rotateRightButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.rotateRightButton.Name = "rotateRightButton";
-            this.rotateRightButton.Size = new System.Drawing.Size(34, 33);
+            this.rotateRightButton.Size = new System.Drawing.Size(34, 28);
             this.rotateRightButton.Text = "toolStripButton2";
             this.rotateRightButton.Click += new System.EventHandler(this.rotateRight);
             // 
@@ -161,9 +117,14 @@
             this.deleteImageButton.Image = global::digital_imaging.Properties.Resources.cross_small;
             this.deleteImageButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.deleteImageButton.Name = "deleteImageButton";
-            this.deleteImageButton.Size = new System.Drawing.Size(34, 33);
+            this.deleteImageButton.Size = new System.Drawing.Size(34, 28);
             this.deleteImageButton.Text = "toolStripButton2";
             this.deleteImageButton.Click += new System.EventHandler(this.deleteImage);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 33);
             // 
             // switchViewButton
             // 
@@ -171,9 +132,48 @@
             this.switchViewButton.Image = global::digital_imaging.Properties.Resources.transform_flip;
             this.switchViewButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.switchViewButton.Name = "switchViewButton";
-            this.switchViewButton.Size = new System.Drawing.Size(34, 33);
+            this.switchViewButton.Size = new System.Drawing.Size(34, 28);
             this.switchViewButton.Text = "toolStripButton2";
             this.switchViewButton.Click += new System.EventHandler(this.switchView);
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.loadingLabel);
+            this.panel2.Controls.Add(this.imageListView1);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(4, 5);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1192, 396);
+            this.panel2.TabIndex = 3;
+            // 
+            // loadingLabel
+            // 
+            this.loadingLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.loadingLabel.Location = new System.Drawing.Point(0, 0);
+            this.loadingLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.loadingLabel.Name = "loadingLabel";
+            this.loadingLabel.Size = new System.Drawing.Size(1192, 396);
+            this.loadingLabel.TabIndex = 2;
+            this.loadingLabel.Text = "Loading...";
+            this.loadingLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.loadingLabel.Visible = false;
+            // 
+            // imageListView1
+            // 
+            this.imageListView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.imageListView1.Location = new System.Drawing.Point(0, 0);
+            this.imageListView1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.imageListView1.Name = "imageListView1";
+            this.imageListView1.PersistentCacheDirectory = "";
+            this.imageListView1.PersistentCacheSize = ((long)(100));
+            this.imageListView1.Size = new System.Drawing.Size(1192, 396);
+            this.imageListView1.TabIndex = 1;
+            this.imageListView1.UseWIC = true;
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
             // 
             // tableLayoutPanel1
             // 
@@ -182,12 +182,12 @@
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.panel2, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 38);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 33);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 61.6208F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 38.3792F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1200, 654);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1200, 659);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
             // tableLayoutPanel2
@@ -205,14 +205,14 @@
             this.tableLayoutPanel2.Controls.Add(this.rejectButton, 2, 3);
             this.tableLayoutPanel2.Controls.Add(this.submitButton, 1, 3);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 406);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 409);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 4;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1194, 245);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1194, 247);
             this.tableLayoutPanel2.TabIndex = 4;
             // 
             // label3

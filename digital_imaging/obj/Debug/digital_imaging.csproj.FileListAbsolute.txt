@@ -141,4 +141,3 @@ D:\c# winApp\digi\digital_imaging\obj\Debug\digital_imaging.exe
 D:\c# winApp\digi\digital_imaging\obj\Debug\digital_imaging.pdb
 D:\c# winApp\digi\digital_imaging\obj\Debug\digital_imaging.DataEnquiry.resources
 D:\c# winApp\digi\digital_imaging\bin\Debug\ImageListView.dll
-D:\c# winApp\digi\digital_imaging\obj\Debug\digital_imaging.Form1.resources
