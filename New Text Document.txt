@@ -1,26 +1,52 @@
-private void formatCell(object sender, DataGridViewCellFormattingEventArgs e)
+ public Boolean CopySupportImge(string sExportFolder, string sImageFolder, string sProcDate, string sBatchID, string sUI, string oUI)
         {
-            if (this.scanItemGrid.Columns[e.ColumnIndex].Name == "status")
+
+            string tpath1 = string.Empty;
+            string tpath2 = string.Empty;
+            string sFromPath = string.Empty;
+            string sDestPath = string.Empty;
+            string filename = string.Empty;
+
+            try
             {
-                if (e.Value != null)
+                if (Directory.Exists(sExportFolder))
                 {
-                    if (e.Value.ToString() == "0")
+                    tpath1 = Path.Combine(sImageFolder, sProcDate);
+                    if (!Directory.Exists(tpath1))
                     {
-                        e.Value = "Scanned";
+                        Directory.CreateDirectory(tpath1);
                     }
-                    else if (e.Value.ToString() == "1")
+                    tpath2 = Path.Combine(tpath1, sBatchID);
+                    if (!Directory.Exists(tpath2))
                     {
-                        e.Value = "Data Entry";
+                        Directory.CreateDirectory(tpath2);
                     }
-                    else if (e.Value.ToString() == "2")
+                    filename = string.Empty;
+                    filename = sUI + MyCommon.CORRES + MyCommon.TIF_FILE_EXTN;
+                    sFromPath = Path.Combine(sExportFolder, oUI+MyCommon.TIF_FILE_EXTN);
+                    sDestPath = Path.Combine(tpath2, filename);
+                    if (File.Exists(sFromPath))
                     {
-                        e.Value = "Completed";
+                      //  if (!File.Exists(sDestPath))
+                      //  {
+                            File.Copy(sFromPath, sDestPath, true);
+                      //  }
                     }
-                    else if (e.Value.ToString() == "3")
-                    {
-                        e.Value = "Rejected";
-                    }
-                    e.FormattingApplied = true;
+
+                }
+                if (File.Exists(sDestPath))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
                 }
             }
+            catch(Exception ex)
+            {
+                ex.Data.Add("***Issue Variables*** ", sExportFolder + " + " + sImageFolder + " + " + sProcDate + " + " + sBatchID + " + " + sUI + " + " + oUI);
+                throw;
+            }
+
         }
