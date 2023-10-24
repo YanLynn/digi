@@ -60,3 +60,27 @@ string filename = string.Empty;
         Console.WriteLine("exception:" + ex.ToString());
         throw;
     }
+ public void WriteToFile(string Message)
+ {
+     string path = AppDomain.CurrentDomain.BaseDirectory + "\\Logs";
+     if (!Directory.Exists(path))
+     {
+         Directory.CreateDirectory(path);
+     }
+     string filepath = filePath_2 + "\\Logs\\ServiceLog_" + DateTime.Now.Date.ToShortDateString().Replace('/', '_') + ".txt";
+     if (!File.Exists(filepath))
+     {
+         // Create a file to write to.
+         using (StreamWriter sw = File.CreateText(filepath))
+         {
+             sw.WriteLine(Message);
+         }
+     }
+     else
+     {
+         using (StreamWriter sw = File.AppendText(filepath))
+         {
+             sw.WriteLine(Message);
+         }
+     }
+ }
